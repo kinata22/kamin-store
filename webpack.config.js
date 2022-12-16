@@ -31,7 +31,7 @@ const baseConfig = {
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, './dist'),
-        assetModuleFilename: 'assets/images/[name][ext]',
+        assetModuleFilename: 'images/[name][ext]',
     },
     performance: {
         hints: false,
@@ -53,7 +53,7 @@ const baseConfig = {
             patterns: [
                 {
                     from: path.resolve(__dirname, 'src/assets/images'),
-                    to: path.resolve(__dirname, 'dist/assets/images'),
+                    to: path.resolve(__dirname, 'dist/images'),
                 },
             ],
         }),
