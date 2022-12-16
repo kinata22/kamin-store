@@ -1,8 +1,10 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const EslingPlugin = require('eslint-webpack-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index.ts'),
@@ -10,10 +12,17 @@ const baseConfig = {
     module: {
         rules: [
             {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                test: /\.ts$/i,
+                use: 'ts-loader',
             },
-            { test: /\.ts$/i, use: 'ts-loader' },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.(ico|gif|png|jpe|jpeg|svg)$/i,
+                type: 'asset/resource',
+            },
         ],
     },
     resolve: {
@@ -22,6 +31,12 @@ const baseConfig = {
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, './dist'),
+        assetModuleFilename: 'assets/images/[name][ext]',
+    },
+    performance: {
+        hints: false,
+        maxAssetSize: 5120000,
+        maxEntrypointSize: 5120000,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -29,7 +44,19 @@ const baseConfig = {
             filename: 'index.html',
         }),
         new CleanWebpackPlugin(),
-        new EslingPlugin({ extensions: 'ts' }),
+        new EslintPlugin({ extensions: 'ts' }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+            chunkFilename: '[id].css',
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'src/assets/images'),
+                    to: path.resolve(__dirname, 'dist/assets/images'),
+                },
+            ],
+        }),
     ],
 };
 
