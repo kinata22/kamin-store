@@ -1,2 +1,4 @@
-const est = 'hello';
-console.log(est);
+import './sass/main.scss';
+
+import hello from './ts/hello';
+hello();
