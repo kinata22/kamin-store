@@ -9,46 +9,50 @@
 </head>
 <body>
   <header>
-    <div class="header__wrap">
+    <div class="container header__wrap">
       <div class="header__logo">
-        <img class="logo" src='./images/pro_kamin_logo.svg' alt="Logo" />
+        <a class="header__logo-link" href="./index.html">
+          <img class="logo" src='./images/pro_kamin_logo.svg' alt="Logo" />
+        </a>
       </div>
       <div class="header__center">
         <div class="cart-price">
-          <span class="cart-price__label">Total price:</span>
+          <span class="cart-price__label">Cart total:</span>
           <span class="cart-price__price">$0</span>
         </div>
       </div>
       <div class="header__cart">
         <div class="b-cart-button__wrapper">
           <span class="b-cart-button__icon"><img class="cart-icon" src='./images/shopping-cart.png' alt="Shopping cart" /></span>
-          <span class="b-cart-button__counter"></span>
+          <span class="b-cart-button__counter">0</span>
         </div>
       </div>
     </div>
-
   </header>
 
   <main>
-    <div class="page-products">
+    <div class="page-product-list">
       <aside>
         <div class="filters">
-          <div class="caterogy"></div>
-          <div class="brand"></div>
-          <div class="price"></div>
-          <div class="weight"></div>
+          <div class="filters__caterogy"></div>
+          <div class="filters__brand"></div>
+          <div class="filters__price"></div>
+          <div class="filters__weight"></div>
         </div>
       </aside>
-      <section class="section-products">
+      <section class="product-list">
         <div class="products"></div>
       </section>
     </div>
 
-    <div class="page-cart">
-
+    <div class="page-product-detail">
     </div>
 
-    div.page-products-details
+    <div class="page-cart">
+    </div>
+
+    <div class="page-404">
+    </div>
   </main>
 
   <footer>
