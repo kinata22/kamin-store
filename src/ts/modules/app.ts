@@ -6,6 +6,7 @@ class App {
 
         const productsList = new ProductsList();
         productsList.draw();
+        productsList.drawSide();
     }
 }
 
