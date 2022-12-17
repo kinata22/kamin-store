@@ -8,9 +8,60 @@
   <title>Online store</title>
 </head>
 <body>
-  <img id="logo" src='./images/pro_kamin_logo.svg' />
+  <header>
+    <div class="header__wrap">
+      <div class="header__logo">
+        <img class="logo" src='./images/pro_kamin_logo.svg' alt="Logo" />
+      </div>
+      <div class="header__center">
+        <div class="cart-price">
+          <span class="cart-price__label">Total price:</span>
+          <span class="cart-price__price">$0</span>
+        </div>
+      </div>
+      <div class="header__cart">
+        <div class="b-cart-button__wrapper">
+          <span class="b-cart-button__icon"><img class="cart-icon" src='./images/shopping-cart.png' alt="Shopping cart" /></span>
+          <span class="b-cart-button__counter"></span>
+        </div>
+      </div>
+    </div>
 
-  <div class="products"></div>
+  </header>
+
+  <main>
+    <div class="page-products">
+      <aside>
+        <div class="filters">
+          <div class="caterogy"></div>
+          <div class="brand"></div>
+          <div class="price"></div>
+          <div class="weight"></div>
+        </div>
+      </aside>
+      <section class="section-products">
+        <div class="products"></div>
+      </section>
+    </div>
+
+    <div class="page-cart">
+
+    </div>
+
+    div.page-products-details
+  </main>
+
+  <footer>
+    <div class="footer__container">
+      <a class="footer__rs-link" href="https://github.com/kinata22" target="_blank">
+        <img class="footer__image" src="./images/logo-github.png" alt="Github icon">
+      </a>
+      <span>&copy; 2022</span>
+      <a class="footer__github-link" href="https://rs.school/js/" target="_blank">
+        <img class="footer__image" src="./images/logo_rs_text.svg" alt="RS School icon">
+      </a>
+    </div>
+  </footer>
 
   <template id="productsItemTemp">
     <div class="products__item">
