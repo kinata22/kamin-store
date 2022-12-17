@@ -1,7 +1,7 @@
 import './products-list.scss';
 
-import { products } from '../../assets/data/products';
-import { IProduct } from '../types/product';
+import { products } from '../../../assets/data/products';
+import { IProduct } from '../../types/product';
 
 class ProductsList {
     data: Array<IProduct>;
