@@ -1,4 +1,4 @@
-import ProductsList from './products-list';
+import ProductsList from './products-list/products-list';
 
 class App {
     start() {
