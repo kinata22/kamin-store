@@ -21,7 +21,7 @@ const baseConfig = {
             },
             {
                 test: /\.(ico|gif|png|jpe|jpeg|svg)$/i,
-                type: 'asset/resource',
+                use: ['file-loader'],
             },
         ],
     },

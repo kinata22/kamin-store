@@ -13,7 +13,8 @@ class ProductsList {
 
             const productsClone = productsItemTemp.content.cloneNode(true) as HTMLElement;
 
-            (productsClone.querySelector('.products__item-image') as HTMLImageElement).src = item.img[0];
+            const imageSrc = `./images/${item.img[0]}`;
+            (productsClone.querySelector('.products__item-image') as HTMLImageElement).src = imageSrc;
 
             (productsClone.querySelector('.products__item-name') as HTMLElement).textContent = item.Name;
             (productsClone.querySelector('.products__item-price') as HTMLElement).textContent = item.Price.toString();
