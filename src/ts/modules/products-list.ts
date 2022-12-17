@@ -4,11 +4,17 @@ import { products } from '../../assets/data/products';
 import { IProduct } from '../types/product';
 
 class ProductsList {
+    data: Array<IProduct>;
+
+    constructor() {
+        this.data = products;
+    }
+
     draw(): void {
         const fragment = document.createDocumentFragment() as DocumentFragment;
         const productsItemTemp = document.querySelector('#productsItemTemp') as HTMLTemplateElement;
 
-        products.forEach((item: IProduct, idx: number) => {
+        this.data.forEach((item: IProduct, idx: number) => {
             console.log(idx, item);
 
             const productsClone = productsItemTemp.content.cloneNode(true) as HTMLElement;
