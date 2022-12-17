@@ -29,12 +29,28 @@ header {
 .logo {
   height: 50px;
 }
-.page-product-list {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
 
 .cart-icon {
   width: 30px;
+}
+
+.page-product-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+aside {
+  flex: 0 0 calc( 30% - 30px );
+  padding: 15px;	
+}
+
+.filters {
+  min-height: 90vh;
+  padding: 15px 0 15px 15px;
+}
+
+.box {
+  background-color: #fff;
 }
