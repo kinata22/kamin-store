@@ -87,7 +87,7 @@ class ProductsList {
             (productsClone.querySelector('.products__item-category') as HTMLElement).textContent = item.category;
 
             const weightElement = productsClone.querySelector('.products__item-weight') as HTMLElement;
-            weightElement.textContent = (item.weight ?? '').toString();
+            weightElement.textContent = (item.weight ?? '').toString() + ' kg';
 
             const brandElement = productsClone.querySelector('.products__item-brand') as HTMLElement;
             brandElement.textContent = item.brand ?? '';
