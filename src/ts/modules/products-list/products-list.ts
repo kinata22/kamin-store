@@ -2,7 +2,7 @@ import './products-list.scss';
 
 import { products } from '../../../assets/data/products';
 import { IProduct } from '../../types/product';
-import { Routes } from '../routes/routes';
+import { Routes, SortOder } from '../routes/routes';
 
 class ProductsList {
     data: Array<IProduct>;
@@ -13,8 +13,13 @@ class ProductsList {
     priceMin = 10000;
     priceMax = 0;
     productInPage = 20;
+    sortOder: SortOder = 'none';
 
     constructor(route: Routes) {
+        if (route.sort == 'wup') products.sort(this.weightUp);
+        if (route.sort == 'wdown') products.sort(this.weightDown);
+        if (route.sort == 'pup') products.sort(this.priceUp);
+        if (route.sort == 'pdown') products.sort(this.priceDown);
         if (route.page >= 0)
             this.data = products.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
         else this.data = products;
@@ -26,6 +31,19 @@ class ProductsList {
             if (this.weightMin > item.weight) this.weightMin = item.weight;
             if (this.weightMax < item.weight) this.weightMax = item.weight;
         });
+    }
+
+    weightUp(a: IProduct, b: IProduct) {
+        return a.weight > b.weight ? 1 : -1;
+    }
+    weightDown(a: IProduct, b: IProduct) {
+        return a.weight > b.weight ? -1 : 1;
+    }
+    priceUp(a: IProduct, b: IProduct) {
+        return a.price > b.price ? 1 : -1;
+    }
+    priceDown(a: IProduct, b: IProduct) {
+        return a.price > b.price ? -1 : 1;
     }
 
     draw(): void {
