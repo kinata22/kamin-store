@@ -35,7 +35,7 @@
       <aside>
         <div class="filters">
           <div class="filters__title">Category</div>
-          <div class="filters__caterogy box"></div>
+          <div class="filters__category box"></div>
           <div class="filters__title">Brand</div>
           <div class="filters__brand box"></div>
           <div class="filters__title">Price</div>
@@ -91,30 +91,40 @@
 
   <template id="productsItemTemp">
     <div class="products__item">
+      <div class="products__item-image-box">
         <img class="products__item-image" src="" alt="Product image">
+      </div>
+      <div class="products__info">
         <div class="products__item-name"></div>
-        <div class="products__item-price"></div>
+        <div class="products__item-price-box">Price: <span class="products__item-price"></span></div>
         <div class="products__item-id"></div>
-        <div class="products__item-category"></div>
-        <div class="products__item-weight"></div>
-        <div class="products__item-brand"></div>
-        <div class="products__item-buttons">
-          <button class="products__item-add-to-card">Add to card</button>
-          <button class="products__item-details">Details</button>
+        <div class="products__item-category-box">
+          Category: 
+          <span class="products__item-category"></span>
         </div>
+        <div class="products__item-weight-box">Weight: <span class="products__item-weight"></span></div>
+        <div class="products__item-brand-box">Brand: <span class="products__item-brand"></span></div>
+      </div>
+      <div class="products__item-buttons">
+        <button class="products__item-add-to-card" data-id="">Add to card</button>
+        <button class="products__item-details" data-id="">Details</button>
+      </div>
     </div>
   </template>
   <template id="catsItemTemp">
-    <!--<div class="checkbox-line item-active">
-      <input type="checkbox" id="smartphones">
-      <label for="smartphones">smartphones</label>
-      <span>(5/5)</span>
-    </div>-->
-    <div class="filters__caterogy-item">
+    <div class="filters__category-item">
+      <div class="filters__checkbox-line">
+        <input type="checkbox" class="category__checkbox" id="">
+        <label for="" class="category__label"></label>
+      </div>
     </div>
   </template>
   <template id="brandsItemTemp">
     <div class="filters__brand-item">
+      <div class="filters__checkbox-line">
+        <input type="checkbox" class="brand__checkbox" id="">
+        <label for="" class="brand__label"></label>
+      </div>
     </div>
   </template>
 

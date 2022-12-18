@@ -531,7 +531,7 @@ export const products: Products = [
         img: ['56743.970.jpg', '56744.970.png'],
     },
     {
-        name: 'Stove KOZA/AB/S/DR/KAFEL/CZERWONY',
+        name: 'Stove KOZA CZERWONY',
         price: 2729,
         id: 5670,
         category: 'Stoves Fireplaces',
@@ -540,7 +540,7 @@ export const products: Products = [
         img: ['10351.970.jpg', '29924.970.png', '29925.970.png'],
     },
     {
-        name: 'Stove Koza/AB/S/N/DR',
+        name: 'Stove Koza/AB/S',
         price: 1770,
         id: 3165,
         category: 'Stoves Fireplaces',
@@ -549,7 +549,7 @@ export const products: Products = [
         img: ['29899.970.png', '29900.970.png'],
     },
     {
-        name: 'Stove KOZA/AB/S/N/O/DR/KAFEL/CZERWONY',
+        name: 'Stove KOZA CZERWONY',
         price: 2283,
         id: 5693,
         category: 'Stoves Fireplaces',
