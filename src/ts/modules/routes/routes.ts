@@ -3,6 +3,8 @@ export class Routes {
     url: URL;
     sort: SortOder;
     page: number;
+    cats: number[];
+    brands: number[];
     constructor() {
         this.url = new URL(window.location.href);
         this.sort = 'none';
@@ -15,5 +17,16 @@ export class Routes {
             const tmp = this.url.searchParams.get('page');
             if (typeof tmp === 'string') this.page = parseInt(tmp);
         }
+        this.brands = [];
+        if (this.url.searchParams.has('brand')) {
+            const tmp = this.url.searchParams.getAll('brand');
+            if (Array.isArray(tmp)) tmp.forEach((item) => this.brands.push(parseInt(item)));
+        }
+        this.cats = [];
+        if (this.url.searchParams.has('cat')) {
+            const tmp = this.url.searchParams.getAll('cat');
+            if (Array.isArray(tmp)) tmp.forEach((item) => this.cats.push(parseInt(item)));
+        }
+        console.log(this.cats, 'cats');
     }
 }

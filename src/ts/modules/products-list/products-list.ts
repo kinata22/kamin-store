@@ -6,6 +6,7 @@ import { Routes, SortOder } from '../routes/routes';
 
 class ProductsList {
     data: Array<IProduct>;
+    newProduct: Array<IProduct>;
     categories: string[] = [];
     brands: string[] = [];
     weightMin = 10000;
@@ -16,14 +17,8 @@ class ProductsList {
     sortOder: SortOder = 'none';
 
     constructor(route: Routes) {
-        if (route.sort == 'wup') products.sort(this.weightUp);
-        if (route.sort == 'wdown') products.sort(this.weightDown);
-        if (route.sort == 'pup') products.sort(this.priceUp);
-        if (route.sort == 'pdown') products.sort(this.priceDown);
-        if (route.page >= 0)
-            this.data = products.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
-        else this.data = products;
         products.forEach((item: IProduct) => {
+            // формируем категории, бренды, цены
             if (this.categories.indexOf(item.category) < 0) this.categories.push(item.category);
             if (this.brands.indexOf(item.brand) < 0) this.brands.push(item.brand);
             if (this.priceMin > item.price) this.priceMin = item.price;
@@ -31,8 +26,32 @@ class ProductsList {
             if (this.weightMin > item.weight) this.weightMin = item.weight;
             if (this.weightMax < item.weight) this.weightMax = item.weight;
         });
-    }
+        this.newProduct = products;
+        if (route.sort == 'wup') this.newProduct = products.sort(this.weightUp);
+        if (route.sort == 'wdown') this.newProduct = products.sort(this.weightDown);
+        if (route.sort == 'pup') this.newProduct = products.sort(this.priceUp);
+        if (route.sort == 'pdown') this.newProduct = products.sort(this.priceDown);
+        if (route.cats.length > 0) {
+            this.newProduct = this.newProduct.filter((item) => this.filterCat(item, route.cats));
+        }
+        if (route.brands.length > 0) {
+            this.newProduct = this.newProduct.filter((item) => this.filterBrand(item, route.brands));
+        }
 
+        if (route.page >= 0)
+            this.data = this.newProduct.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
+        else this.data = this.newProduct;
+    }
+    filterCat(item: IProduct, arr: number[]) {
+        const pos = this.categories.indexOf(item.category);
+        if (arr.indexOf(pos) >= 0) return true;
+        return false;
+    }
+    filterBrand(item: IProduct, arr: number[]) {
+        const pos = this.brands.indexOf(item.brand);
+        if (arr.indexOf(pos) >= 0) return true;
+        return false;
+    }
     weightUp(a: IProduct, b: IProduct) {
         return a.weight > b.weight ? 1 : -1;
     }
