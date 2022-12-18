@@ -34,20 +34,36 @@
     <div class="page-product-list">
       <aside>
         <div class="filters">
-          Category:
-          <div class="filters__caterogy box">
-          </div>
-          Brand:
-          <div class="filters__brand box">
-          </div>
-          Price:
+          <div class="filters__title">Category</div>
+          <div class="filters__caterogy box"></div>
+          <div class="filters__title">Brand</div>
+          <div class="filters__brand box"></div>
+          <div class="filters__title">Price</div>
           <div class="filters__price box"></div>
-          Weight:
+          <div class="filters__title">Weight</div>
           <div class="filters__weight box"></div>
         </div>
       </aside>
       <section class="product-list">
+        <div class="sort">
+          <div class="product-sort">
+            <label>Sort by:</label>
+            <select>
+              <option value="/">Featured</option>
+              <option value="price-ASC">Sort by price ASC</option>
+              <option value="price-DESC">Sort by price DESC</option>
+              <option value="rating-ASC">Sort by rating ASC</option>
+              <option value="rating-DESC">Sort by rating DESC</option>
+              <option value="discount-ASC">Sort by discount ASC</option>
+              <option value="discount-DESC">Sort by discount DESC</option>
+            </select>
+          </div>
+        </div>
         <div class="products"></div>
+        <div class="product-pagination">
+          <button class="product-pagination b-page" data-page="1">1</button>
+          <button class="product-pagination b-page" data-page="2">20</button>
+        </div>
       </section>
     </div>
 
@@ -62,7 +78,7 @@
   </main>
 
   <footer>
-    <div class="footer__container">
+    <div class="container footer__container">
       <a class="footer__rs-link" href="https://github.com/kinata22" target="_blank">
         <img class="footer__image" src="./images/logo-github.png" alt="Github icon">
       </a>
@@ -89,6 +105,11 @@
     </div>
   </template>
   <template id="catsItemTemp">
+    <!--<div class="checkbox-line item-active">
+      <input type="checkbox" id="smartphones">
+      <label for="smartphones">smartphones</label>
+      <span>(5/5)</span>
+    </div>-->
     <div class="filters__caterogy-item">
     </div>
   </template>
