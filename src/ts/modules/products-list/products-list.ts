@@ -2,6 +2,7 @@ import './products-list.scss';
 
 import { products } from '../../../assets/data/products';
 import { IProduct } from '../../types/product';
+import { Routes } from '../routes/routes';
 
 class ProductsList {
     data: Array<IProduct>;
@@ -11,10 +12,13 @@ class ProductsList {
     weightMax = 0;
     priceMin = 10000;
     priceMax = 0;
+    productInPage = 20;
 
-    constructor() {
-        this.data = products;
-        this.data.forEach((item: IProduct) => {
+    constructor(route: Routes) {
+        if (route.page >= 0)
+            this.data = products.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
+        else this.data = products;
+        products.forEach((item: IProduct) => {
             if (this.categories.indexOf(item.category) < 0) this.categories.push(item.category);
             if (this.brands.indexOf(item.brand) < 0) this.brands.push(item.brand);
             if (this.priceMin > item.price) this.priceMin = item.price;
