@@ -1,14 +1,14 @@
-import ProductsList from './products-list/products-list';
 import { Routes } from './routes/routes';
+import ProductsList from './products-list/products-list';
 
 class App {
-    start() {
-        console.log('start');
-
-        const route = new Routes();
-        const productsList = new ProductsList(route);
-        productsList.draw();
-        productsList.drawSide();
+    route: Routes;
+    productsList: ProductsList;
+    constructor() {
+        this.route = new Routes();
+        this.productsList = new ProductsList(this.route);
+        this.productsList.draw();
+        this.productsList.drawSide();
     }
 }
 

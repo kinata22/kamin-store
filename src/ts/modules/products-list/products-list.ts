@@ -2,11 +2,10 @@ import './products-list.scss';
 
 import { products } from '../../../assets/data/products';
 import { IProduct } from '../../types/product';
-import { Routes, SortOder } from '../routes/routes';
+import { Routes } from '../routes/routes';
 
 class ProductsList {
     data: Array<IProduct>;
-    newProduct: Array<IProduct>;
     categories: string[] = [];
     brands: string[] = [];
     weightMin = 10000;
@@ -14,7 +13,7 @@ class ProductsList {
     priceMin = 10000;
     priceMax = 0;
     productInPage = 20;
-    sortOder: SortOder = 'none';
+    sortOder = 'none'; //SortOder = 'none';
 
     constructor(route: Routes) {
         products.forEach((item: IProduct) => {
@@ -26,22 +25,38 @@ class ProductsList {
             if (this.weightMin > item.weight) this.weightMin = item.weight;
             if (this.weightMax < item.weight) this.weightMax = item.weight;
         });
-        this.newProduct = products;
-        if (route.sort == 'wup') this.newProduct = products.sort(this.weightUp);
-        if (route.sort == 'wdown') this.newProduct = products.sort(this.weightDown);
-        if (route.sort == 'pup') this.newProduct = products.sort(this.priceUp);
-        if (route.sort == 'pdown') this.newProduct = products.sort(this.priceDown);
+        // формируем массив товаров по условиям
+        this.data = this.formData(route);
+    }
+
+    formData(route: Routes) {
+        let newProduct: Array<IProduct>;
+        newProduct = products;
+        if (route.sort == 'none') newProduct = products.sort(this.idUp);
+        if (route.sort == 'wup') newProduct = products.sort(this.weightUp);
+        if (route.sort == 'wdown') newProduct = products.sort(this.weightDown);
+        if (route.sort == 'pup') newProduct = products.sort(this.priceUp);
+        if (route.sort == 'pdown') newProduct = products.sort(this.priceDown);
         if (route.cats.length > 0) {
-            this.newProduct = this.newProduct.filter((item) => this.filterCat(item, route.cats));
+            newProduct = newProduct.filter((item) => this.filterCat(item, route.cats));
         }
         if (route.brands.length > 0) {
-            this.newProduct = this.newProduct.filter((item) => this.filterBrand(item, route.brands));
+            newProduct = newProduct.filter((item) => this.filterBrand(item, route.brands));
         }
 
         if (route.page >= 0)
-            this.data = this.newProduct.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
-        else this.data = this.newProduct;
+            return newProduct.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
+        console.log(this.sortOder, newProduct[0]);
+        return newProduct;
     }
+
+    setSortOder(sort: string, route: Routes) {
+        this.sortOder = sort;
+        console.log(this.sortOder);
+        this.data = this.formData(route);
+        this.draw();
+    }
+
     filterCat(item: IProduct, arr: number[]) {
         const pos = this.categories.indexOf(item.category);
         if (arr.indexOf(pos) >= 0) return true;
@@ -64,9 +79,12 @@ class ProductsList {
     priceDown(a: IProduct, b: IProduct) {
         return a.price > b.price ? -1 : 1;
     }
-
+    idUp(a: IProduct, b: IProduct) {
+        return a.id > b.id ? 1 : -1;
+    }
     draw(): void {
-        const fragment = document.createDocumentFragment() as DocumentFragment;
+        let fragment: DocumentFragment | null = null;
+        fragment = document.createDocumentFragment() as DocumentFragment;
         const productsItemTemp = document.querySelector('#productsItemTemp') as HTMLTemplateElement;
 
         this.data.forEach((item: IProduct /*, idx: number*/) => {
@@ -98,11 +116,16 @@ class ProductsList {
             const btnDetails = productsClone.querySelector('.products__item-details') as HTMLButtonElement;
             btnDetails.dataset.id = item.id.toString();
 
-            fragment.append(productsClone);
+            if (fragment) fragment.append(productsClone);
         });
 
-        (document.querySelector('.products') as HTMLDivElement).innerHTML = '';
-        (document.querySelector('.products') as HTMLDivElement).appendChild(fragment);
+        let tmp: Element | null = null;
+        tmp = document.getElementById('products');
+        if (tmp !== null) {
+            tmp.innerHTML = '';
+            // alert(fragment);
+            tmp.appendChild(fragment);
+        }
     }
 
     setCheckbox(cloneElem: HTMLElement, title: string, idx: number, type: string): HTMLElement {

@@ -1,7 +1,7 @@
-export type SortOder = 'none' | 'wup' | 'wdown' | 'pup' | 'pdown';
+//export type SortOder = 'none' | 'wup' | 'wdown' | 'pup' | 'pdown';
 export class Routes {
     url: URL;
-    sort: SortOder;
+    sort: string; //SortOder;
     page: number;
     cats: number[];
     brands: number[];
@@ -27,6 +27,11 @@ export class Routes {
             const tmp = this.url.searchParams.getAll('cat');
             if (Array.isArray(tmp)) tmp.forEach((item) => this.cats.push(parseInt(item)));
         }
-        console.log(this.cats, 'cats');
+    }
+    setSortOder(value: string) {
+        this.sort = value;
+        if (value !== 'none') this.url.searchParams.set('sort', value);
+        else this.url.searchParams.delete('sort');
+        location.hash = this.url.search;
     }
 }
