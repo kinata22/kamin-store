@@ -14,6 +14,7 @@ class ProductsList {
     priceMax = 0;
     productInPage = 20;
     sortOder = 'none'; //SortOder = 'none';
+    pages = 0;
 
     constructor(route: Routes) {
         products.forEach((item: IProduct) => {
@@ -43,10 +44,9 @@ class ProductsList {
         if (route.brands.length > 0) {
             newProduct = newProduct.filter((item) => this.filterBrand(item, route.brands));
         }
-
+        this.pages = Math.floor(newProduct.length / this.productInPage);
         if (route.page >= 0)
             return newProduct.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
-        console.log(this.sortOder, newProduct[0]);
         return newProduct;
     }
 
@@ -123,7 +123,6 @@ class ProductsList {
         tmp = document.getElementById('products');
         if (tmp !== null) {
             tmp.innerHTML = '';
-            // alert(fragment);
             tmp.appendChild(fragment);
         }
     }

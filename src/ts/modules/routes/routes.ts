@@ -28,10 +28,13 @@ export class Routes {
             if (Array.isArray(tmp)) tmp.forEach((item) => this.cats.push(parseInt(item)));
         }
     }
+
     setSortOder(value: string) {
         this.sort = value;
-        if (value !== 'none') this.url.searchParams.set('sort', value);
-        else this.url.searchParams.delete('sort');
-        location.hash = this.url.search;
+        this.url.searchParams.delete('sort');
+        this.url.searchParams.set('sort', value);
+        //location.href = this.url.search;  перегружает страницу
+        //location.hash = this.url.search;  добавляет £
+        history.pushState({ page: this.url.search }, '', this.url.search);
     }
 }
