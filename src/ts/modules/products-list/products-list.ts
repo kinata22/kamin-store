@@ -15,6 +15,7 @@ class ProductsList {
     productInPage = 20;
     sortOder = 'none'; //SortOder = 'none';
     pages = 0;
+    currentPage = 0;
 
     constructor(route: Routes) {
         products.forEach((item: IProduct) => {
@@ -45,6 +46,7 @@ class ProductsList {
             newProduct = newProduct.filter((item) => this.filterBrand(item, route.brands));
         }
         this.pages = Math.floor(newProduct.length / this.productInPage);
+        this.currentPage = route.page;
         if (route.page >= 0)
             return newProduct.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
         return newProduct;
@@ -156,6 +158,24 @@ class ProductsList {
         (document.querySelector('.filters__category') as HTMLDivElement).appendChild(fragmentCat);
         (document.querySelector('.filters__brand') as HTMLDivElement).innerHTML = '';
         (document.querySelector('.filters__brand') as HTMLDivElement).appendChild(fragmentBrand);
+    }
+
+    drawPages(): void {
+        const pagination: HTMLDivElement | null = document.querySelector('#pagination');
+        for (let i = 0; i < this.pages; i++) {
+            const btn: HTMLButtonElement = document.createElement('button');
+            btn.className = 'b-page';
+            if (i === this.currentPage) {
+                btn.classList.add('active');
+            }
+            btn.innerHTML = (i + 1).toString();
+
+            btn.addEventListener('click', function () {
+                console.log(i.toString());
+            });
+
+            pagination?.appendChild(btn);
+        }
     }
 }
 
