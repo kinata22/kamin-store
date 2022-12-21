@@ -16,8 +16,10 @@ class ProductsList {
     sortOder = 'none'; //SortOder = 'none';
     pages = 0;
     currentPage = 0;
+    route: Routes;
 
     constructor(route: Routes) {
+        this.route = route;
         products.forEach((item: IProduct) => {
             // формируем категории, бренды, цены
             if (this.categories.indexOf(item.category) < 0) this.categories.push(item.category);
@@ -54,9 +56,14 @@ class ProductsList {
 
     setSortOder(sort: string, route: Routes) {
         this.sortOder = sort;
-        console.log(this.sortOder);
         this.data = this.formData(route);
         this.draw();
+    }
+    setPage(page: number) {
+        this.currentPage = page;
+        this.data = this.formData(this.route);
+        this.draw();
+        this.drawPages(this.route);
     }
 
     filterCat(item: IProduct, arr: number[]) {
@@ -160,8 +167,10 @@ class ProductsList {
         (document.querySelector('.filters__brand') as HTMLDivElement).appendChild(fragmentBrand);
     }
 
-    drawPages(): void {
+    drawPages(route: Routes): void {
         const pagination: HTMLDivElement | null = document.querySelector('#pagination');
+        if (pagination === null) return;
+        pagination.innerHTML = '';
         for (let i = 0; i < this.pages; i++) {
             const btn: HTMLButtonElement = document.createElement('button');
             btn.className = 'b-page';
@@ -169,8 +178,12 @@ class ProductsList {
                 btn.classList.add('active');
             }
             btn.innerHTML = (i + 1).toString();
+            const obj = this;
 
             btn.addEventListener('click', function () {
+                route.setPage(i);
+                obj.setPage(i);
+                // setPage(numPage, route);
                 console.log(i.toString());
             });
 

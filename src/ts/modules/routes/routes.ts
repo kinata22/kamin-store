@@ -37,4 +37,10 @@ export class Routes {
         //location.hash = this.url.search;  добавляет £
         history.pushState({ page: this.url.search }, '', this.url.search);
     }
+    setPage(value: number) {
+        this.page = value;
+        this.url.searchParams.delete('page');
+        this.url.searchParams.set('page', String(value));
+        history.pushState({ page: this.url.search }, '', this.url.search);
+    }
 }
