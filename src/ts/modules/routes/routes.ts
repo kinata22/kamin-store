@@ -43,4 +43,17 @@ export class Routes {
         this.url.searchParams.set('page', String(value));
         history.pushState({ page: this.url.search }, '', this.url.search);
     }
+    setCheckBox(idx: number, type: string, checked: boolean) {
+        if (type === 'category') {
+            const tmp = this.cats.indexOf(idx);
+            if (tmp !== -1 && !checked) this.cats.splice(tmp, 1);
+            if (tmp === -1 && checked) this.cats.push(idx);
+        }
+        if (type === 'brand') {
+            const tmp = this.brands.indexOf(idx);
+            if (tmp !== -1 && !checked) this.brands.splice(tmp, 1);
+            if (tmp === -1 && checked) this.brands.push(idx);
+        }
+        // console.log('rotes', this.cats, checked, idx);
+    }
 }

@@ -11,7 +11,7 @@ const app = new App();
 const select = document.getElementsByTagName('select')[0];
 select.addEventListener('change', function () {
     app.route.setSortOder(this.value);
-    app.productsList.setSortOder(this.value, app.route);
+    app.productsList.setSortOder(this.value);
 });
 
 /*
