@@ -1,0 +1,57 @@
+/* based on https://habr.com/ru/post/466623/ */
+.filter-wrapper {
+    padding: 10px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -o-flex-direction: column;
+    flex-direction: column;
+}
+
+.filter-numbers {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+}
+
+.slider {
+    margin-top: 10px;
+    position: relative;
+    height: 6px;
+    background: #fff;
+    border: 1px solid #000;
+}
+
+.color-range {
+    position: absolute;
+    background: #a4a4a4;
+    width: 92%;
+    border: none;
+    height: 6px;
+    left: 15px;
+}
+
+.block-min,
+.block-max {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: 0;
+    top: -6.5px;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.block-max {
+    left: 92%;
+}

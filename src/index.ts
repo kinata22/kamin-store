@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './sass/slider.scss';
 //import { SortOder } from './ts/modules/routes/routes';
 //import ProductsList from './ts/modules/products-list/products-list';
 
@@ -24,3 +25,16 @@ for (let i = 0; i < pages.length; i++) {
     });
 }
 */
+
+//import Slider from './ts/slider';
+//const slider = new Slider();
+import './ts/slider';
+const sliders = document.querySelectorAll('price');
+for (let i = 0; i < sliders.length; i++) {
+    sliders[i].addEventListener('mousedown', function () {
+        //moveRange(this);
+    });
+    sliders[i].addEventListener('touchstart', function () {
+        //moveRange(this);
+    });
+}
