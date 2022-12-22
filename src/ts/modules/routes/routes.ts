@@ -45,15 +45,45 @@ export class Routes {
     }
     setCheckBox(idx: number, type: string, checked: boolean) {
         if (type === 'category') {
-            const tmp = this.cats.indexOf(idx);
-            if (tmp !== -1 && !checked) this.cats.splice(tmp, 1);
-            if (tmp === -1 && checked) this.cats.push(idx);
+            const tmp = this.cats.indexOf(idx); // есть ли категория в уже выбранных
+            const arrcat = this.url.searchParams.getAll('category'); // массив всех категорий из урл
+            const tmppos = arrcat.indexOf(String(idx)); //  есть ли категория в урл
+            // категория есть, и ее надо удалить, не выбрана
+            if (tmp !== -1 && !checked) {
+                this.cats.splice(tmp, 1);
+                if (tmppos > -1) arrcat.splice(tmppos, 1);
+            }
+            // категориий нет, она выбрана, ее надо добавить
+            if (tmp === -1 && checked) {
+                this.cats.push(idx);
+                if (tmppos === -1) arrcat.push(String(idx));
+            }
+            this.url.searchParams.delete('category'); // чистим массив категорий
+            // и добавляем по нашему списку
+            for (let i = 0; i < arrcat.length; i += 1) {
+                this.url.searchParams.append('category', arrcat[i]);
+            }
         }
         if (type === 'brand') {
             const tmp = this.brands.indexOf(idx);
-            if (tmp !== -1 && !checked) this.brands.splice(tmp, 1);
-            if (tmp === -1 && checked) this.brands.push(idx);
+            const arrbr = this.url.searchParams.getAll('brand');
+            const tmppos = arrbr.indexOf(String(idx));
+            if (tmp !== -1 && !checked) {
+                this.brands.splice(tmp, 1);
+                if (tmppos > -1) arrbr.splice(tmppos, 1);
+            }
+            if (tmp === -1 && checked) {
+                this.brands.push(idx);
+                if (tmppos === -1) arrbr.push(String(idx));
+            }
+            this.url.searchParams.delete('brand'); // чистим массив брендов
+            // и добавляем по нашему списку
+            for (let i = 0; i < arrbr.length; i += 1) {
+                this.url.searchParams.append('brand', arrbr[i]);
+            }
         }
-        // console.log('rotes', this.cats, checked, idx);
+        this.url.searchParams.delete('page'); // выбор сменили чекбоксов - выбор страниц удалили
+        this.page = 0;
+        history.pushState({ page: this.url.search }, '', this.url.search);
     }
 }
