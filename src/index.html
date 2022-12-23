@@ -8,23 +8,125 @@
   <title>Online store</title>
 </head>
 <body>
-  <img id="logo" src='./images/pro_kamin_logo.svg' />
+  <header>
+    <div class="container header__wrap">
+      <div class="header__logo">
+        <a class="header__logo-link" href="./index.html">
+          <img class="logo" src='./images/pro_kamin_logo.svg' alt="Logo" />
+        </a>
+      </div>
+      <div class="header__center">
+        <div class="cart-price">
+          <span class="cart-price__label">Cart total:</span>
+          <span class="cart-price__price">$0</span>
+        </div>
+      </div>
+      <div class="header__cart">
+        <div class="b-cart-button__wrapper">
+          <span class="b-cart-button__icon"><img class="cart-icon" src='./images/shopping-cart.png' alt="Shopping cart" /></span>
+          <span class="b-cart-button__counter">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <div class="products"></div>
+  <main>
+    <div class="page-product-list">
+      <aside>
+        <div class="filters">
+          <div class="filters__title">Category</div>
+          <div class="filters__category box"></div>
+          <div class="filters__title">Brand</div>
+          <div class="filters__brand box"></div>
+          <div class="filters__title">Price</div>
+          <div class="filters__price box"></div>
+          <div class="filters__title">Weight</div>
+          <div class="filters__weight box"></div>
+        </div>
+      </aside>
+      <section class="product-list">
+        <div class="sort">
+          <div class="product-sort">
+            <label>Sort by:</label>
+            <select>
+              <option value="none">As is</option>
+              <option value="pup">Sort by price ASC</option>
+              <option value="pdown">Sort by price DESC</option>
+              <option value="wup">Sort by weight ASC</option>
+              <option value="wdown">Sort by weight DESC</option>
+            </select>
+          </div>
+        </div>
+        <div class="products" id="products"></div>
+        <div class="product-pagination"  id="pagination">
+        </div>
+      </section>
+    </div>
+
+    <div class="page-product-detail">
+    </div>
+
+    <div class="page-cart">
+    </div>
+
+    <div class="page-404">
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer__container">
+      <a class="footer__rs-link" href="https://github.com/kinata22" target="_blank">
+        <img class="footer__image" src="./images/logo-github.png" alt="Github icon">
+      </a>
+      <span>&copy; 2022</span>
+      <a class="footer__github-link" href="https://rs.school/js/" target="_blank">
+        <img class="footer__image" src="./images/logo_rs_text.svg" alt="RS School icon">
+      </a>
+    </div>
+  </footer>
 
   <template id="productsItemTemp">
     <div class="products__item">
+      <div class="products__item-image-box">
         <img class="products__item-image" src="" alt="Product image">
+      </div>
+      <div class="products__info">
         <div class="products__item-name"></div>
-        <div class="products__item-price"></div>
+        <div class="products__item-price-box">Price: <span class="products__item-price"></span></div>
         <div class="products__item-id"></div>
-        <div class="products__item-category"></div>
-        <div class="products__item-weight"></div>
-        <div class="products__item-brand"></div>
-        <div class="products__item-buttons">
-          <button class="products__item-add-to-card">Add to card</button>
-          <button class="products__item-details">Details</button>
+        <div class="products__item-category-box">
+          Category: 
+          <span class="products__item-category"></span>
         </div>
+        <div class="products__item-weight-box">Weight: <span class="products__item-weight"></span></div>
+        <div class="products__item-brand-box">Brand: <span class="products__item-brand"></span></div>
+      </div>
+      <div class="products__item-buttons">
+        <button class="products__item-add-to-card" data-id="">Add to card</button>
+        <button class="products__item-details" data-id="">Details</button>
+      </div>
+    </div>
+  </template>
+  <template id="catsItemTemp">
+    <div class="filters__category-item">
+      <div class="filters__checkbox-line">
+        <input type="checkbox" class="category__checkbox" id="">
+        <label for="" class="category__label"></label>
+        <div class="filters__num">
+          <span class="category__num"></span>
+        </div>
+      </div>
+    </div>
+  </template>
+  <template id="brandsItemTemp">
+    <div class="filters__brand-item">
+      <div class="filters__checkbox-line">
+        <input type="checkbox" class="brand__checkbox" id="">
+        <label for="" class="brand__label"></label>
+        <div class="filters__num">
+          <span class="brand__num"></span>
+        </div>
+      </div>
     </div>
   </template>
 
