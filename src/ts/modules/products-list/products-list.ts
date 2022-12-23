@@ -126,40 +126,52 @@ class ProductsList {
         return a.id > b.id ? 1 : -1;
     }
     draw(): void {
-        let fragment: DocumentFragment | null = null;
-        fragment = document.createDocumentFragment() as DocumentFragment;
-        const productsItemTemp = document.querySelector('#productsItemTemp') as HTMLTemplateElement;
+        const fragment: DocumentFragment | null = document.createDocumentFragment();
+        const productsItemTemp: HTMLTemplateElement | null = document.querySelector('#productsItemTemp');
 
         this.data.forEach((item: IProduct /*, idx: number*/) => {
             //console.log(idx, item);
 
-            const productsClone = productsItemTemp.content.cloneNode(true) as HTMLElement;
+            const productsClone: Node | undefined = productsItemTemp?.content.cloneNode(true);
 
             const imageSrc = `./images/${item.img[0]}`;
-            (productsClone.querySelector('.products__item-image') as HTMLImageElement).src = imageSrc;
 
-            (productsClone.querySelector('.products__item-name') as HTMLElement).textContent = item.name;
+            if (productsClone instanceof HTMLElement) {
+                const htmlItemImage: HTMLImageElement | null = productsClone.querySelector('.products__item-image');
+                if (htmlItemImage) htmlItemImage.src = imageSrc;
 
-            const priceFormatted = `$${item.price.toString()}`;
-            (productsClone.querySelector('.products__item-price') as HTMLElement).textContent = priceFormatted;
+                const htmlItemName: HTMLImageElement | null = productsClone.querySelector('.products__item-name');
+                if (htmlItemName) htmlItemName.textContent = item.name;
 
-            (productsClone.querySelector('.products__item-id') as HTMLElement).textContent = item.id.toString();
+                const priceFormatted = `$${item.price.toString()}`;
 
-            (productsClone.querySelector('.products__item-category') as HTMLElement).textContent = item.category;
+                const htmlItemPrice: HTMLImageElement | null = productsClone.querySelector('.products__item-price');
+                if (htmlItemPrice) htmlItemPrice.textContent = priceFormatted;
 
-            const weightElement = productsClone.querySelector('.products__item-weight') as HTMLElement;
-            weightElement.textContent = (item.weight ?? '').toString() + ' kg';
+                const htmlItemId: HTMLImageElement | null = productsClone.querySelector('.products__item-id');
+                if (htmlItemId) htmlItemId.textContent = item.id.toString();
 
-            const brandElement = productsClone.querySelector('.products__item-brand') as HTMLElement;
-            brandElement.textContent = item.brand ?? '';
+                const htmlItemCategory: HTMLImageElement | null = productsClone.querySelector(
+                    '.products__item-category'
+                );
+                if (htmlItemCategory) htmlItemCategory.textContent = item.category;
 
-            const btnAddToCart = productsClone.querySelector('.products__item-add-to-card') as HTMLButtonElement;
-            btnAddToCart.dataset.id = item.id.toString();
+                const weightElement: HTMLElement | null = productsClone.querySelector('.products__item-weight');
+                if (weightElement) weightElement.textContent = (item.weight ?? '').toString() + ' kg';
 
-            const btnDetails = productsClone.querySelector('.products__item-details') as HTMLButtonElement;
-            btnDetails.dataset.id = item.id.toString();
+                const brandElement: HTMLElement | null = productsClone.querySelector('.products__item-brand');
+                if (brandElement) brandElement.textContent = item.brand ?? '';
 
-            if (fragment) fragment.append(productsClone);
+                const btnAddToCart: HTMLButtonElement | null = productsClone.querySelector(
+                    '.products__item-add-to-card'
+                );
+                if (btnAddToCart) btnAddToCart.dataset.id = item.id.toString();
+
+                const btnDetails: HTMLButtonElement | null = productsClone.querySelector('.products__item-details');
+                if (btnDetails) btnDetails.dataset.id = item.id.toString();
+
+                if (fragment) fragment.append(productsClone);
+            }
         });
 
         let tmp: Element | null = null;
@@ -171,29 +183,35 @@ class ProductsList {
     }
 
     setCheckbox(cloneElem: HTMLElement, title: string, idx: number, type: string): HTMLElement {
-        const checkbox = cloneElem.querySelector(`.${type}__checkbox`) as HTMLInputElement;
+        const checkbox: HTMLInputElement | null = cloneElem.querySelector(`.${type}__checkbox`);
         const checkboxId = type + idx.toString();
-        checkbox.id = checkboxId;
-        const label = cloneElem.querySelector(`.${type}__label`) as HTMLLabelElement;
-        label.htmlFor = checkboxId;
-        label.textContent = title;
+        if (checkbox) checkbox.id = checkboxId;
+        const label: HTMLLabelElement | null = cloneElem.querySelector(`.${type}__label`);
+        if (label) {
+            label.htmlFor = checkboxId;
+            label.textContent = title;
+        }
         //
-        const num = cloneElem.querySelector(`.${type}__num`) as HTMLSpanElement;
-        if (type == 'brand')
-            num.innerHTML = ' (' + String(this.brandsN[idx]) + ' / ' + String(this.brandsN[idx]) + ') ';
-        else num.innerHTML = ' (' + String(this.categoriesN[idx]) + ' / ' + String(this.categoriesN[idx]) + ') ';
+        const num: HTMLSpanElement | null = cloneElem.querySelector(`.${type}__num`);
+        if (num) {
+            if (type == 'brand')
+                num.innerHTML = ' (' + String(this.brandsN[idx]) + ' / ' + String(this.brandsN[idx]) + ') ';
+            else num.innerHTML = ' (' + String(this.categoriesN[idx]) + ' / ' + String(this.categoriesN[idx]) + ') ';
+        }
         //
         const obj = this;
-        if (type === 'category') if (obj.route.cats.indexOf(idx) !== -1) checkbox.checked = true;
-        if (type === 'brand') if (obj.route.brands.indexOf(idx) !== -1) checkbox.checked = true;
-        //
-        checkbox.addEventListener('click', function () {
-            obj.route.setCheckBox(idx, type, this.checked);
-            obj.data = obj.formData();
-            obj.setCheckboxValues();
-            obj.draw();
-            obj.drawPages();
-        });
+        if (checkbox) {
+            if (type === 'category') if (obj.route.cats.indexOf(idx) !== -1) checkbox.checked = true;
+            if (type === 'brand') if (obj.route.brands.indexOf(idx) !== -1) checkbox.checked = true;
+            //
+            checkbox.addEventListener('click', function () {
+                obj.route.setCheckBox(idx, type, this.checked);
+                obj.data = obj.formData();
+                obj.setCheckboxValues();
+                obj.draw();
+                obj.drawPages();
+            });
+        }
         return cloneElem;
     }
     setCheckboxValues(): void {
@@ -213,24 +231,36 @@ class ProductsList {
     }
 
     drawSide(): void {
-        const fragmentCat = document.createDocumentFragment() as DocumentFragment;
-        const fragmentBrand = document.createDocumentFragment() as DocumentFragment;
-        const categoryItemTemp = document.querySelector('#catsItemTemp') as HTMLTemplateElement;
-        const brandItemTemp = document.querySelector('#brandsItemTemp') as HTMLTemplateElement;
+        const fragmentCat: DocumentFragment | null = document.createDocumentFragment();
+        const fragmentBrand: DocumentFragment | null = document.createDocumentFragment();
+        const categoryItemTemp: HTMLTemplateElement | null = document.querySelector('#catsItemTemp');
+        const brandItemTemp: HTMLTemplateElement | null = document.querySelector('#brandsItemTemp');
 
-        this.categories.forEach((item: string, idx: number) => {
-            const catClone = categoryItemTemp.content.cloneNode(true) as HTMLElement;
-            fragmentCat.append(this.setCheckbox(catClone, item, idx, 'category'));
-        });
-        this.brands.forEach((item: string, idx: number) => {
-            const brandClone = brandItemTemp.content.cloneNode(true) as HTMLElement;
-            //(brandClone.querySelector('.filters__brand-item') as HTMLElement).textContent = item;
-            fragmentBrand.append(this.setCheckbox(brandClone, item, idx, 'brand'));
-        });
-        (document.querySelector('.filters__category') as HTMLDivElement).innerHTML = '';
-        (document.querySelector('.filters__category') as HTMLDivElement).appendChild(fragmentCat);
-        (document.querySelector('.filters__brand') as HTMLDivElement).innerHTML = '';
-        (document.querySelector('.filters__brand') as HTMLDivElement).appendChild(fragmentBrand);
+        if (categoryItemTemp) {
+            this.categories.forEach((item: string, idx: number) => {
+                const catClone = categoryItemTemp.content.cloneNode(true) as HTMLElement;
+                fragmentCat.append(this.setCheckbox(catClone, item, idx, 'category'));
+            });
+        }
+        if (brandItemTemp) {
+            this.brands.forEach((item: string, idx: number) => {
+                const brandClone = brandItemTemp.content.cloneNode(true) as HTMLElement;
+                //(brandClone.querySelector('.filters__brand-item') as HTMLElement).textContent = item;
+                fragmentBrand.append(this.setCheckbox(brandClone, item, idx, 'brand'));
+            });
+        }
+
+        const filtersCategoryElem: HTMLDivElement | null = document.querySelector('.filters__category');
+        if (filtersCategoryElem) {
+            filtersCategoryElem.innerHTML = '';
+            filtersCategoryElem.appendChild(fragmentCat);
+        }
+
+        const filtersBrandElem: HTMLDivElement | null = document.querySelector('.filters__brand');
+        if (filtersBrandElem) {
+            filtersBrandElem.innerHTML = '';
+            filtersBrandElem.appendChild(fragmentBrand);
+        }
     }
 
     drawPages(): void {
