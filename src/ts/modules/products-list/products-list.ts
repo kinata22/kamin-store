@@ -132,46 +132,40 @@ class ProductsList {
         this.data.forEach((item: IProduct /*, idx: number*/) => {
             //console.log(idx, item);
 
-            const productsClone: Node | undefined = productsItemTemp?.content.cloneNode(true);
+            const productsClone: HTMLElement | undefined = <HTMLElement>productsItemTemp?.content.cloneNode(true);
 
             const imageSrc = `./images/${item.img[0]}`;
 
-            if (productsClone instanceof HTMLElement) {
-                const htmlItemImage: HTMLImageElement | null = productsClone.querySelector('.products__item-image');
-                if (htmlItemImage) htmlItemImage.src = imageSrc;
+            const htmlItemImage: HTMLImageElement | null = productsClone.querySelector('.products__item-image');
+            if (htmlItemImage) htmlItemImage.src = imageSrc;
 
-                const htmlItemName: HTMLImageElement | null = productsClone.querySelector('.products__item-name');
-                if (htmlItemName) htmlItemName.textContent = item.name;
+            const htmlItemName: HTMLImageElement | null = productsClone.querySelector('.products__item-name');
+            if (htmlItemName) htmlItemName.textContent = item.name;
 
-                const priceFormatted = `$${item.price.toString()}`;
+            const priceFormatted = `$${item.price.toString()}`;
 
-                const htmlItemPrice: HTMLImageElement | null = productsClone.querySelector('.products__item-price');
-                if (htmlItemPrice) htmlItemPrice.textContent = priceFormatted;
+            const htmlItemPrice: HTMLImageElement | null = productsClone.querySelector('.products__item-price');
+            if (htmlItemPrice) htmlItemPrice.textContent = priceFormatted;
 
-                const htmlItemId: HTMLImageElement | null = productsClone.querySelector('.products__item-id');
-                if (htmlItemId) htmlItemId.textContent = item.id.toString();
+            const htmlItemId: HTMLImageElement | null = productsClone.querySelector('.products__item-id');
+            if (htmlItemId) htmlItemId.textContent = item.id.toString();
 
-                const htmlItemCategory: HTMLImageElement | null = productsClone.querySelector(
-                    '.products__item-category'
-                );
-                if (htmlItemCategory) htmlItemCategory.textContent = item.category;
+            const htmlItemCategory: HTMLImageElement | null = productsClone.querySelector('.products__item-category');
+            if (htmlItemCategory) htmlItemCategory.textContent = item.category;
 
-                const weightElement: HTMLElement | null = productsClone.querySelector('.products__item-weight');
-                if (weightElement) weightElement.textContent = (item.weight ?? '').toString() + ' kg';
+            const weightElement: HTMLElement | null = productsClone.querySelector('.products__item-weight');
+            if (weightElement) weightElement.textContent = (item.weight ?? '').toString() + ' kg';
 
-                const brandElement: HTMLElement | null = productsClone.querySelector('.products__item-brand');
-                if (brandElement) brandElement.textContent = item.brand ?? '';
+            const brandElement: HTMLElement | null = productsClone.querySelector('.products__item-brand');
+            if (brandElement) brandElement.textContent = item.brand ?? '';
 
-                const btnAddToCart: HTMLButtonElement | null = productsClone.querySelector(
-                    '.products__item-add-to-card'
-                );
-                if (btnAddToCart) btnAddToCart.dataset.id = item.id.toString();
+            const btnAddToCart: HTMLButtonElement | null = productsClone.querySelector('.products__item-add-to-card');
+            if (btnAddToCart) btnAddToCart.dataset.id = item.id.toString();
 
-                const btnDetails: HTMLButtonElement | null = productsClone.querySelector('.products__item-details');
-                if (btnDetails) btnDetails.dataset.id = item.id.toString();
+            const btnDetails: HTMLButtonElement | null = productsClone.querySelector('.products__item-details');
+            if (btnDetails) btnDetails.dataset.id = item.id.toString();
 
-                if (fragment) fragment.append(productsClone);
-            }
+            if (fragment) fragment.append(productsClone);
         });
 
         let tmp: Element | null = null;
