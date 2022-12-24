@@ -45,7 +45,7 @@
         </div>
       </aside>
       <section class="product-list">
-        <div class="sort">
+        <div class="sort" style="display:flex">
           <div class="product-sort">
             <label>Sort by:</label>
             <select>
@@ -56,7 +56,12 @@
               <option value="wdown">Sort by weight DESC</option>
             </select>
           </div>
+          <div class="product-view">
+            <button id="plitka1" class="product-view-button"><img src="images/plitka1.png" alt="Плитка"></button>
+            <button id="plitka2" class="product-view-button"><img src="images/plitka2.png" alt="Крупная плитка" ></button>
+          </div>
         </div>
+
         <div class="products" id="products"></div>
         <div class="product-pagination"  id="pagination">
         </div>

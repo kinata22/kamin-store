@@ -6,6 +6,7 @@ type Product = {
     weight: number;
     brand: string;
     img: string[];
+    desc?: string;
 };
 type Products = Product[];
 
@@ -18,6 +19,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 76,
         img: ['53624.970.jpg', '53625.970.jpg', '53626.970.jpg', '53627.970.jpg', '53628.970.jpg', '59063.970.jpg'],
+        desc: `External facing of soapstone or majolika. Enameled oven. Door, base and top-plate of cast-iron'
+        Ceramic glass resistant up to 750°C`,
     },
     {
         name: 'La Nordica TermoRossella Plus Forno D.S.A',
@@ -27,6 +30,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 75,
         img: ['53629.970.jpg', '53630.970.jpg', '53631.970.jpg', '53632.970.jpg', '53633.970.jpg', '59067.970.jpg'],
+        desc: `Features: Exterior finish of the facade with majolica or natural stone • Removable firewood drawer • 
+        Enamelled oven with panoramic glass • Air supply regulators for primary combustion, afterburning system and for glass cleaning`,
     },
     {
         name: 'Stove K900, soapstone (Keddy)',
@@ -36,6 +41,8 @@ export const products: Products = [
         weight: 140,
         brand: 'Keddy',
         img: ['71384.970.jpg', '71385.970.jpg', '71386.970.jpg'],
+        desc: `The K900 is a new wood-burning stove that has everything to match the renowned quality of the Swedish company Keddy. Chrome-plated glass trim.
+        Heating stove with panoramic glass with a viewing angle of 180 degrees.`,
     },
     {
         name: 'Stove VESTA, red (Plamen)',
@@ -45,6 +52,11 @@ export const products: Products = [
         weight: 130,
         brand: 'Plamen',
         img: ['71146.970.jpg', '71147.970.jpg'],
+        desc: `The V8 double-sided contains everything you would expect from British-built high efficiency woodburner, 
+        and the design itself is a classic fusion of simplicity and technological advances. The V8 double-sided introduces a
+        tertiary jet of combustion air into the flue gasses allowing for enhanced combustion and increased efficiency.
+        Preheated air is also injected into the combustion zone through Vesta’s rear primary air supply. The classic curved
+        surfaces on the V8 double-sided add style and these arcs are carried on throughout the theme of the fire.`,
     },
     {
         name: 'Stove Warm CS rosso (EdilKamin)',
@@ -54,6 +66,9 @@ export const products: Products = [
         weight: 0,
         brand: 'EdilKamin',
         img: ['70809.970.jpg', '70810.970.jpg', '70811.970.jpg'],
+        desc: `The elegance of enameled ceramic cladding / 2 colors to choose from: amber yellow and red / 
+        in combination with modern Edilkamin wood burning stove technology. The side parts, the front part and
+        the base are cast iron, the structure of the furnace and the hearth are steel. Door with vitroceramic glass, resistant to thermal shock up to 800°C.`,
     },
     {
         name: 'Stove MORSO 1010',
@@ -63,6 +78,7 @@ export const products: Products = [
         weight: 70,
         brand: 'Morso',
         img: ['25154.970.jpg', '25155.970.jpg', '25156.970.jpg', '25157.970.jpg'],
+        desc: `Retaining the well-known Morsø details and straightforward operation, Morsø 1010 is a well known member of the family of small classic Morsø stoves. Naturally, the delightful atmosphere, that many of us remember as something quite unique from past campfires, will be provided by the large glass area. Morsø 1010 is carried out entirely in sturdy cast iron – the best imaginable material for woodburning stoves. Combustionwise, Morsø 1010 meets the strictest Danish environmental standards.`,
     },
     {
         name: 'Stove-Fireplace Jotul F 167',
@@ -72,6 +88,7 @@ export const products: Products = [
         weight: 159,
         brand: 'Jotul',
         img: ['24993.970.jpg', '24994.970.jpg', '24995.970.jpg', '24996.970.png'],
+        desc: `Jøtul's F 167 log burning stove is part of the F 160 series which consists of five main variants, with or without side glasses and with different bases and features. The Jøtul F 167 woodstove is characterised by the large side glasses and the elegant placement on top of a pedestal which with time has become an award-winning signature design for Jøtul. You can place a top made from soapstone on this stove. This will provide extra heat retaining capacities and a slightly different look. The wood stove is designed for modern living and is suitable for low effect heating. It burns at an optimal level even at 3kW.`,
     },
     {
         name: 'Stove-Fireplace Jotul F 500 ECO BP',
@@ -81,6 +98,7 @@ export const products: Products = [
         weight: 200,
         brand: 'Jotul',
         img: ['25060.970.jpg', '25061.970.jpg'],
+        desc: `Stove - fireplace Jotul F 500 ECO BP is a fairly powerful wood-burning stove, made in a classic style with large glass doors for observing the fire. Stove fireplace Jotul F 500 ECO BP - this stove is a novelty of the manufacturer, it differs from previous models JOTUL F 500 in the form of Gothic grates. The design of the firebox of the Jotul F 500 ECO BP fireplace stove ensures self-cleaning of glass from soot. It is possible to supply air from the street or adjacent premises.`,
     },
     {
         name: 'Stove-Fireplace Morso 2140',
@@ -90,6 +108,8 @@ export const products: Products = [
         weight: 141,
         brand: 'Morso',
         img: ['25184.970.jpg', '25185.970.jpg', '25186.970.jpg', '25187.970.jpg', '25188.970.jpg', '25189.970.jpg'],
+        desc: `Morsø’s 2140 is designed by Robin Levien from the well-known English design company Queensbury, Hunt & Levien (London). 2140 is a convection stove that is available with either the squirrel relief or ribbed sides.
+        The Morsø 2140 wood-burning stove is ideal as the primary heat source for your home. The stove has an extra wide firebox, which means it can be fired with large logs. The large glass windows offer an excellent view of the fire. Morsø’s combustion system with airwash ensures that the glass always remains clean when the stove is correctly fired.`,
     },
     {
         name: 'Stove-Fireplace Morso 3142',
@@ -99,6 +119,9 @@ export const products: Products = [
         weight: 110,
         brand: 'Morso',
         img: ['25191.970.jpg', '25192.970.jpg', '25193.970.jpg', '25194.970.jpg', '25195.970.jpg', '25196.970.jpg'],
+        desc: `The 3142 is equipped with a riddling grate and ashpan, making it easy to remove ash and clean the stove.
+        It is manufactured using the latest combustion principles with tertiary air supply and meets the most stringent environmental requirements.
+        It can be fired with wood, briquettes or approved smokeless fuel and is suitable for heating an area of up to 75 cubic metres.`,
     },
     {
         name: 'Stove-Fireplace Morso 6843',

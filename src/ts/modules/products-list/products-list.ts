@@ -21,6 +21,9 @@ class ProductsList {
     pages = 0;
     currentPage = 0;
     route: Routes;
+    view = 'plitka1';
+    b_view_1: HTMLElement | null;
+    b_view_2: HTMLElement | null;
 
     constructor(route: Routes) {
         this.route = route;
@@ -44,6 +47,22 @@ class ProductsList {
             if (this.weightMin > item.weight) this.weightMin = item.weight;
             if (this.weightMax < item.weight) this.weightMax = item.weight;
         });
+        // рисуем кнопочки переключения вида и запускаем отслеживание у них событий
+        this.view = route.view;
+        this.b_view_1 = document.getElementById('plitka1');
+        this.b_view_2 = document.getElementById('plitka2');
+        if (this.b_view_1 !== null && this.b_view_2 !== null) {
+            const obj = this;
+            this.b_view_1.addEventListener('click', function () {
+                route.setView('plitka1');
+                obj.setView('plitka1');
+            });
+            this.b_view_2.addEventListener('click', function () {
+                route.setView('plitka2');
+                obj.setView('plitka2');
+            });
+            this.viewSetBorder(route.view);
+        }
         // формируем массив товаров по условиям
         this.data = this.formData();
     }
@@ -82,6 +101,19 @@ class ProductsList {
         if (route.page >= 0)
             return newProduct.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
         return newProduct;
+    }
+
+    viewSetBorder(view: string) {
+        // рисуем рамки вокруг типа обзора
+        if (this.b_view_1 !== null && this.b_view_2 !== null) {
+            if (view === 'plitka1') {
+                this.b_view_1.style.border = '1px solid gray';
+                this.b_view_2.style.border = '0px';
+            } else {
+                this.b_view_2.style.border = '1px solid gray';
+                this.b_view_1.style.border = '0px';
+            }
+        }
     }
 
     setSortOder(sort: string): void {
@@ -125,6 +157,58 @@ class ProductsList {
     idUp(a: IProduct, b: IProduct): number {
         return a.id > b.id ? 1 : -1;
     }
+    setCheckbox(cloneElem: HTMLElement, title: string, idx: number, type: string): HTMLElement {
+        const checkbox: HTMLInputElement | null = cloneElem.querySelector(`.${type}__checkbox`);
+        const checkboxId = type + idx.toString();
+        if (checkbox) checkbox.id = checkboxId;
+        const label: HTMLLabelElement | null = cloneElem.querySelector(`.${type}__label`);
+        if (label) {
+            label.htmlFor = checkboxId;
+            label.textContent = title;
+        }
+        //
+        const num: HTMLSpanElement | null = cloneElem.querySelector(`.${type}__num`);
+        if (num) {
+            if (type == 'brand')
+                num.innerHTML = ' (' + String(this.brandsN[idx]) + ' / ' + String(this.brandsN[idx]) + ') ';
+            else num.innerHTML = ' (' + String(this.categoriesN[idx]) + ' / ' + String(this.categoriesN[idx]) + ') ';
+        }
+        //
+        const obj = this;
+        if (checkbox) {
+            if (type === 'category') if (obj.route.cats.indexOf(idx) !== -1) checkbox.checked = true;
+            if (type === 'brand') if (obj.route.brands.indexOf(idx) !== -1) checkbox.checked = true;
+            //
+            checkbox.addEventListener('click', function () {
+                obj.route.setCheckBox(idx, type, this.checked);
+                obj.data = obj.formData();
+                obj.setCheckboxValues();
+                obj.draw();
+                obj.drawPages();
+            });
+        }
+        return cloneElem;
+    }
+    setCheckboxValues(): void {
+        /* вывод значений после фильтра около рубрик и брендов */
+        let elems = document.getElementsByClassName('brand__num');
+        let i = 0;
+        for (const elem of elems) {
+            elem.innerHTML = ' (' + String(this.brandsN[i]) + ' / ' + String(this.brandsNCur[i]) + ') ';
+            i += 1;
+        }
+        elems = document.getElementsByClassName('category__num');
+        i = 0;
+        for (const elem of elems) {
+            elem.innerHTML = ' (' + String(this.categoriesN[i]) + ' / ' + String(this.categoriesNCur[i]) + ') ';
+            i += 1;
+        }
+    }
+    setView(view: string): void {
+        this.view = view;
+        this.draw();
+    }
+
     draw(): void {
         const fragment: DocumentFragment | null = document.createDocumentFragment();
         const productsItemTemp: HTMLTemplateElement | null = document.querySelector('#productsItemTemp');
@@ -173,55 +257,16 @@ class ProductsList {
         if (tmp !== null) {
             tmp.innerHTML = '';
             tmp.appendChild(fragment);
-        }
-    }
 
-    setCheckbox(cloneElem: HTMLElement, title: string, idx: number, type: string): HTMLElement {
-        const checkbox: HTMLInputElement | null = cloneElem.querySelector(`.${type}__checkbox`);
-        const checkboxId = type + idx.toString();
-        if (checkbox) checkbox.id = checkboxId;
-        const label: HTMLLabelElement | null = cloneElem.querySelector(`.${type}__label`);
-        if (label) {
-            label.htmlFor = checkboxId;
-            label.textContent = title;
+            if (this.view === 'plitka2') {
+                const tmp1 = document.getElementsByClassName('products__item');
+                for (let i = 0; i < tmp1.length; i++) {
+                    const tmp2 = tmp1[i];
+                    tmp2.classList.add('products__item-view2');
+                }
+            }
         }
-        //
-        const num: HTMLSpanElement | null = cloneElem.querySelector(`.${type}__num`);
-        if (num) {
-            if (type == 'brand')
-                num.innerHTML = ' (' + String(this.brandsN[idx]) + ' / ' + String(this.brandsN[idx]) + ') ';
-            else num.innerHTML = ' (' + String(this.categoriesN[idx]) + ' / ' + String(this.categoriesN[idx]) + ') ';
-        }
-        //
-        const obj = this;
-        if (checkbox) {
-            if (type === 'category') if (obj.route.cats.indexOf(idx) !== -1) checkbox.checked = true;
-            if (type === 'brand') if (obj.route.brands.indexOf(idx) !== -1) checkbox.checked = true;
-            //
-            checkbox.addEventListener('click', function () {
-                obj.route.setCheckBox(idx, type, this.checked);
-                obj.data = obj.formData();
-                obj.setCheckboxValues();
-                obj.draw();
-                obj.drawPages();
-            });
-        }
-        return cloneElem;
-    }
-    setCheckboxValues(): void {
-        /* вывод значений после фильтра около рубрик и брендов */
-        let elems = document.getElementsByClassName('brand__num');
-        let i = 0;
-        for (const elem of elems) {
-            elem.innerHTML = ' (' + String(this.brandsN[i]) + ' / ' + String(this.brandsNCur[i]) + ') ';
-            i += 1;
-        }
-        elems = document.getElementsByClassName('category__num');
-        i = 0;
-        for (const elem of elems) {
-            elem.innerHTML = ' (' + String(this.categoriesN[i]) + ' / ' + String(this.categoriesNCur[i]) + ') ';
-            i += 1;
-        }
+        this.viewSetBorder(this.view);
     }
 
     drawSide(): void {
@@ -273,8 +318,6 @@ class ProductsList {
             btn.addEventListener('click', function () {
                 obj.route.setPage(i);
                 obj.setPage(i);
-                // setPage(numPage, route);
-                console.log(i.toString());
             });
 
             pagination?.appendChild(btn);

@@ -1,6 +1,4 @@
 import './sass/main.scss';
-//import { SortOder } from './ts/modules/routes/routes';
-//import ProductsList from './ts/modules/products-list/products-list';
 
 import hello from './ts/hello';
 hello();
@@ -13,14 +11,3 @@ select.addEventListener('change', function () {
     app.route.setSortOder(this.value);
     app.productsList.setSortOder(this.value);
 });
-
-/*
-const pages = document.querySelectorAll('.b-page');
-for (let i = 0; i < pages.length; i++) {
-    const numPage: number = parseInt(pages[i].innerHTML);
-    pages[i].addEventListener('click', function () {
-        app.route.setPage(numPage);
-        app.productsList.setPage(numPage);
-    });
-}
-*/

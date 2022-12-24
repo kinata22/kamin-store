@@ -1,10 +1,10 @@
-//export type SortOder = 'none' | 'wup' | 'wdown' | 'pup' | 'pdown';
 export class Routes {
     url: URL;
     sort: string; //SortOder;
     page: number;
     cats: number[];
     brands: number[];
+    view: string;
     constructor() {
         this.url = new URL(window.location.href);
         this.sort = 'none';
@@ -23,9 +23,14 @@ export class Routes {
             if (Array.isArray(tmp)) tmp.forEach((item) => this.brands.push(parseInt(item)));
         }
         this.cats = [];
-        if (this.url.searchParams.has('cat')) {
-            const tmp = this.url.searchParams.getAll('cat');
+        if (this.url.searchParams.has('category')) {
+            const tmp = this.url.searchParams.getAll('category');
             if (Array.isArray(tmp)) tmp.forEach((item) => this.cats.push(parseInt(item)));
+        }
+        this.view = 'plitka1';
+        if (this.url.searchParams.has('view')) {
+            const tmp = this.url.searchParams.get('view');
+            if (tmp !== null) this.view = tmp;
         }
     }
 
@@ -84,6 +89,20 @@ export class Routes {
         }
         this.url.searchParams.delete('page'); // выбор сменили чекбоксов - выбор страниц удалили
         this.page = 0;
+        history.pushState({ page: this.url.search }, '', this.url.search);
+    }
+    setView(view: string) {
+        console.log(view);
+        if (view === 'plitka1') {
+            this.url.searchParams.set('view', 'plitka1');
+            this.view = 'plitka1';
+            console.log('view1');
+        }
+        if (view === 'plitka2') {
+            this.url.searchParams.set('view', 'plitka2');
+            this.view = 'plitka2';
+            console.log('view2');
+        }
         history.pushState({ page: this.url.search }, '', this.url.search);
     }
 }

@@ -111,3 +111,27 @@ footer {
 .footer__image {
   height: 40px;
 }
+
+.sort {
+  display:flex;
+}
+
+.product-view {
+  margin-left: 60px;
+  padding-top: 5px;
+}
+
+.product-view-button {
+  border: 0px;
+  padding: 0px;
+  margin: 0px 5px;
+  cursor: pointer;
+}
+
+.product-view-button__selected {
+  border: 1px solid gray;
+}
+.product-view button img{
+  width: 30px;
+}
+

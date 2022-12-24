@@ -49,3 +49,19 @@ $title-color: #861806;
 .products__item-id {
     display: none;
 }
+
+.products__item-view2{
+    flex: 1 12%;
+    .products__item-category-box{
+        display: none;
+    }
+    .products__item-category-box{
+        display: none;
+    }
+    .products__item-weight-box{
+        display: none;
+    }
+    .products__item-brand-box{
+        display: none;
+    }
+}
