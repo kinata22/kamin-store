@@ -24,6 +24,7 @@ class ProductDetail {
         this.weight = data.weight;
         this.brand = data.brand;
         this.img = data.img;
+        this.desc = data.desc;
         console.log(data);
     }
 
@@ -66,6 +67,9 @@ class ProductDetail {
 
         const brandElement: HTMLElement | null = document.querySelector('.product-brand');
         if (brandElement) brandElement.textContent = this.brand ?? '';
+
+        const descElement: HTMLElement | null = document.querySelector('.product-desc');
+        if (descElement) descElement.textContent = this.desc ?? '';
     }
 }
 

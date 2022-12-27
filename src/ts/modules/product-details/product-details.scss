@@ -5,8 +5,14 @@
   padding: 15px;
 }
 
+.picture-main-container {
+    display: flex;
+    gap: 10px;
+}
+
 .pictures-gallery {
     display: flex;
+    gap: 10px;
 }
 
 .pictures-gallery div {
