@@ -34,15 +34,34 @@
     <div class="page-product-list">
       <aside>
         <div class="filters">
+          <div class="filters__title">Price</div>
+          <div class="filters__price box filter">
+              <div>
+                  <div><span id="nPriceMin">10</span><span id="nPriceMax">50</span></div>
+                  <div class="slider" id="priceSlider">
+                      <div class="block-min" id="priceMin"></div>
+                      <div class="color-range" id="priceRange"></div>
+                      <div class="block-max" id="priceMax"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="filters__title">Weight</div>
+          <div class="filters__weight box filter">
+            <div>
+              <div><span id="nWeightMin">0</span><span id="nWeightMax">5</span></div>
+              <div class="slider"  id="weightSlider">
+                  <div class="block-min" id="weightMin"></div>
+                  <div class="color-range" id="weightRange"></div>
+                  <div class="block-max" id="weightMax"></div>
+              </div>
+            </div>
+          </div>
           <div class="filters__title">Category</div>
           <div class="filters__category box"></div>
           <div class="filters__title">Brand</div>
           <div class="filters__brand box"></div>
-          <div class="filters__title">Price</div>
-          <div class="filters__price box"></div>
-          <div class="filters__title">Weight</div>
-          <div class="filters__weight box"></div>
-        </div>
+
+      </div>
       </aside>
       <section class="product-list">
         <div class="sort" style="display:flex">

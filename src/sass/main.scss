@@ -12,6 +12,10 @@ body {
   margin: 0;
 }
 
+h2 {
+  margin:50px;
+}
+
 header {
   height: 60px;
   background-color: #fff;
@@ -133,5 +137,59 @@ footer {
 }
 .product-view button img{
   width: 30px;
+}
+
+
+.filter {
+  padding: 15px 30px;
+}
+.filter>div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+}
+.filter>div>div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-between;
+}
+.filter .slider {
+  margin-top: 10px;
+  position: relative;
+  height: 6px;
+  background: #fff;
+  border: 1px solid #000;
+}
+.filter .color-range {
+  position: absolute;
+  background: #a4a4a4;
+  width: 97%;
+  border: none;
+  height: 6px;
+  left: 15px;
+}
+.filter .block-min, .block-max {
+width: 15px;
+height: 25px;
+position: absolute;
+left: 0;
+top: -11.5px;
+background: #fff;
+border: 1px solid #000;
+border-radius: 4px;
+z-index: 1;
+}
+.filter .block-max{
+  left: 97%;
 }
 

@@ -7,3 +7,26 @@ export interface IProduct {
     brand: string;
     img: string[];
 }
+
+export interface ICoords {
+    top: number;
+    left: number;
+    leftX: number;
+    rigth: number;
+    bottom: number;
+    width: number;
+}
+
+export interface ICoord {
+    top: number;
+    left: number;
+    leftX: number;
+    rigth: number;
+    bottom: number;
+    width: number;
+}
+
+export interface IParent {
+    element: HTMLElement;
+    coords: ICoord;
+}
