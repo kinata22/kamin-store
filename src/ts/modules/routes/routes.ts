@@ -5,6 +5,10 @@ export class Routes {
     cats: number[];
     brands: number[];
     view: string;
+    weightFrom: string;
+    weightTo: string;
+    priceFrom: string;
+    priceTo: string;
     constructor() {
         this.url = new URL(window.location.href);
         this.sort = 'none';
@@ -32,6 +36,26 @@ export class Routes {
             const tmp = this.url.searchParams.get('view');
             if (tmp !== null) this.view = tmp;
         }
+        this.weightFrom = '';
+        this.weightTo = '';
+        this.priceFrom = '';
+        this.priceTo = '';
+        if (this.url.searchParams.has('weightFrom')) {
+            const tmp = this.url.searchParams.get('weightFrom');
+            if (tmp !== null) this.weightFrom = tmp;
+        }
+        if (this.url.searchParams.has('weightTo')) {
+            const tmp = this.url.searchParams.get('weightTo');
+            if (tmp !== null) this.weightTo = tmp;
+        }
+        if (this.url.searchParams.has('priceTo')) {
+            const tmp = this.url.searchParams.get('priceTo');
+            if (tmp !== null) this.priceTo = tmp;
+        }
+        if (this.url.searchParams.has('priceFrom')) {
+            const tmp = this.url.searchParams.get('priceFrom');
+            if (tmp !== null) this.priceFrom = tmp;
+        }
     }
 
     setSortOder(value: string) {
@@ -49,10 +73,12 @@ export class Routes {
         history.pushState({ page: this.url.search }, '', this.url.search);
     }
     setCheckBox(idx: number, type: string, checked: boolean) {
+        console.log('setCheckBox', this.cats);
         if (type === 'category') {
             const tmp = this.cats.indexOf(idx); // есть ли категория в уже выбранных
             const arrcat = this.url.searchParams.getAll('category'); // массив всех категорий из урл
             const tmppos = arrcat.indexOf(String(idx)); //  есть ли категория в урл
+            console.log('setCheckBox tmp tmpps checked', tmp, tmppos, checked);
             // категория есть, и ее надо удалить, не выбрана
             if (tmp !== -1 && !checked) {
                 this.cats.splice(tmp, 1);
@@ -63,6 +89,7 @@ export class Routes {
                 this.cats.push(idx);
                 if (tmppos === -1) arrcat.push(String(idx));
             }
+            console.log('setCheckBox arrcat', arrcat);
             this.url.searchParams.delete('category'); // чистим массив категорий
             // и добавляем по нашему списку
             for (let i = 0; i < arrcat.length; i += 1) {
@@ -89,10 +116,11 @@ export class Routes {
         }
         this.url.searchParams.delete('page'); // выбор сменили чекбоксов - выбор страниц удалили
         this.page = 0;
-        history.pushState({ page: this.url.search }, '', this.url.search);
+        console.log('setCheckBox arrcat', this.url.search);
+        if (this.url.search === '') history.pushState({}, '', 'index.html');
+        else history.pushState({}, '', this.url.search);
     }
     setView(view: string) {
-        console.log(view);
         if (view === 'plitka1') {
             this.url.searchParams.set('view', 'plitka1');
             this.view = 'plitka1';
@@ -101,8 +129,21 @@ export class Routes {
         if (view === 'plitka2') {
             this.url.searchParams.set('view', 'plitka2');
             this.view = 'plitka2';
-            console.log('view2');
         }
-        history.pushState({ page: this.url.search }, '', this.url.search);
+        if (this.url.search === '') history.pushState({}, '', 'index.html');
+        else history.pushState({}, '', this.url.search);
+    }
+
+    setBoundaries(from: number, to: number, type: string) {
+        const fromStr = type.concat('From');
+        const toStr = type.concat('To');
+        if (from < 1) this.url.searchParams.delete(fromStr);
+        else this.url.searchParams.set(fromStr, String(from));
+
+        if (to < 1) this.url.searchParams.delete(toStr);
+        else this.url.searchParams.set(toStr, String(to));
+
+        if (this.url.search === '') history.pushState({}, '', 'index.html');
+        else history.pushState({}, '', this.url.search);
     }
 }

@@ -9,6 +9,7 @@ class App {
         this.productsList = new ProductsList(this.route);
         this.productsList.draw();
         this.productsList.drawSide();
+        this.productsList.drawCheckboxValues();
         this.productsList.drawPages();
     }
 }

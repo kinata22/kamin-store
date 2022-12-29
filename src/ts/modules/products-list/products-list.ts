@@ -21,57 +21,31 @@ class ProductsList {
     view = 'plitka1';
     b_view_1: HTMLElement | null;
     b_view_2: HTMLElement | null;
+
     // переменные бегунков
-    priceSlider: HTMLElement | null;
+    priceSlider: HTMLElement | null; // элементы слайдеры, вес и цена
     weightSlider: HTMLElement | null;
-    priceMinE: HTMLElement | null;
+    priceMinE: HTMLElement | null; // элементы бегунки, 4 штуки и 2 полоски между бегунками
     priceMaxE: HTMLElement | null;
     priceRange: HTMLElement | null;
     weightMinE: HTMLElement | null;
     weightMaxE: HTMLElement | null;
     weightRange: HTMLElement | null;
-    weightMin = 10000;
-    weightMax = 0;
-    priceMin = 10000;
-    priceMax = 0;
-    priceMinCur = 0;
-    priceMaxCur = 0;
-    weightMinCur = 0;
-    weightMaxCur = 0;
+    mainWeightMin: number; // граничные веса и цены для товаров без условий
+    mainWeightMax: number;
+    mainPriceMin: number;
+    mainPriceMax: number;
+    weightMin: number; // граничные веса и цены для текущего набора товаров с условиями
+    weightMax: number;
+    priceMin: number;
+    priceMax: number;
+    curPriceMin: number; // границы бегунков (они всегда внутри текущих интервалов)
+    curPriceMax: number;
+    curWeightMin: number;
+    curWeightMax: number;
 
     constructor(route: Routes) {
         this.route = route;
-        products.forEach((item: IProduct) => {
-            // формируем категории, бренды, цены
-            let n = this.categories.indexOf(item.category);
-            if (n < 0) {
-                this.categories.push(item.category);
-                this.categoriesN.push(1);
-            } else this.categoriesN[n] += 1;
-            n = this.brands.indexOf(item.brand);
-            if (n < 0) {
-                this.brands.push(item.brand);
-                this.brandsN.push(1);
-            } else this.brandsN[n] += 1;
-            this.brandsNCur.length = this.brandsN.length;
-            this.categoriesNCur.length = this.categoriesN.length;
-        });
-        // рисуем кнопочки переключения вида и запускаем отслеживание у них событий
-        this.view = route.view;
-        this.b_view_1 = document.getElementById('plitka1');
-        this.b_view_2 = document.getElementById('plitka2');
-        if (this.b_view_1 !== null && this.b_view_2 !== null) {
-            const obj = this;
-            this.b_view_1.addEventListener('click', function () {
-                route.setView('plitka1');
-                obj.setView('plitka1');
-            });
-            this.b_view_2.addEventListener('click', function () {
-                route.setView('plitka2');
-                obj.setView('plitka2');
-            });
-            this.viewSetBorder(route.view);
-        }
         // запоминаем элементы слайдеров
         this.priceSlider = document.getElementById('priceSlider');
         this.weightSlider = document.getElementById('weightSlider');
@@ -88,8 +62,60 @@ class ProductsList {
         this.weightMaxE = document.getElementById('weightMax');
         this.weightRange = document.getElementById('weightRange');
 
+        // формируем категории, бренды, цены
+        this.weightMin = products[0].weight;
+        this.weightMax = products[0].weight;
+        this.priceMin = products[0].price;
+        this.priceMax = products[0].price;
+        products.forEach((item: IProduct) => {
+            let n = this.categories.indexOf(item.category);
+            if (n < 0) {
+                this.categories.push(item.category);
+                this.categoriesN.push(1);
+            } else this.categoriesN[n] += 1;
+            n = this.brands.indexOf(item.brand);
+            if (n < 0) {
+                this.brands.push(item.brand);
+                this.brandsN.push(1);
+            } else this.brandsN[n] += 1;
+            this.brandsNCur.length = this.brandsN.length;
+            this.categoriesNCur.length = this.categoriesN.length;
+            if (this.priceMin > item.price) this.priceMin = item.price;
+            if (this.priceMax < item.price) this.priceMax = item.price;
+            if (this.weightMin > item.weight) this.weightMin = item.weight;
+            if (this.weightMax < item.weight) this.weightMax = item.weight;
+        });
+        this.mainPriceMin = this.curPriceMin = this.priceMin;
+        this.mainPriceMax = this.curPriceMax = this.priceMax;
+        this.mainWeightMin = this.curWeightMin = this.weightMin;
+        this.mainWeightMax = this.curWeightMax = this.weightMax;
+        if (route.weightFrom != '') this.curWeightMin = Number(route.weightFrom);
+        if (route.weightTo != '') this.curWeightMax = Number(route.weightTo);
+        if (route.priceTo != '') this.curPriceMax = Number(route.priceTo);
+        if (route.priceFrom != '') this.curPriceMin = Number(route.priceFrom);
+
+        this.setBegunokPos(this.curPriceMin, this.curPriceMax, this.curWeightMin, this.curWeightMax);
+
+        // рисуем кнопочки переключения вида и запускаем отслеживание у них событий
+        this.view = route.view;
+        this.b_view_1 = document.getElementById('plitka1');
+        this.b_view_2 = document.getElementById('plitka2');
+        if (this.b_view_1 !== null && this.b_view_2 !== null) {
+            const obj = this;
+            this.b_view_1.addEventListener('click', function () {
+                route.setView('plitka1');
+                obj.setView('plitka1');
+            });
+            this.b_view_2.addEventListener('click', function () {
+                route.setView('plitka2');
+                obj.setView('plitka2');
+            });
+            this.drawViewButtonBorder(route.view);
+        }
+
         // формируем массив товаров по условиям
         this.data = this.formData();
+        if (this.weightMinE) console.log('end constr', this.weightMinE.style.left);
     }
 
     formData(): Array<IProduct> {
@@ -101,55 +127,57 @@ class ProductsList {
         if (route.sort == 'wdown') newProduct = products.sort(this.weightDown);
         if (route.sort == 'pup') newProduct = products.sort(this.priceUp);
         if (route.sort == 'pdown') newProduct = products.sort(this.priceDown);
-        // console.log('before filter', newProduct.length);
+
+        // фильтруем по категориям и бренду
         if (route.cats.length > 0) {
             newProduct = newProduct.filter((item) => this.filterCat(item, route.cats));
         }
         if (route.brands.length > 0) {
             newProduct = newProduct.filter((item) => this.filterBrand(item, route.brands));
         }
-        // считаем текущие значения для чекбоксов
-        this.categoriesNCur.fill(0);
-        this.brandsNCur.fill(0);
 
         // интервал цены и веса
-        if (newProduct.length > 0) {
-            this.priceMin = newProduct[0].price;
-            this.priceMax = newProduct[0].price;
-            this.weightMin = newProduct[0].weight;
-            this.weightMax = newProduct[0].weight;
-        } else {
-            this.priceMin = 0;
-            this.priceMax = 0;
-            this.weightMin = 0;
-            this.weightMax = 0;
-        }
-        // берем мин и макс и категории для текущего набора
+        this.priceMin = this.mainPriceMax;
+        this.priceMax = this.mainPriceMin;
+        this.weightMin = this.mainWeightMax;
+        this.weightMax = this.mainWeightMin;
+
+        // берем мин и макс веса для текущего набора
         newProduct.forEach((item: IProduct) => {
             if (this.priceMin > item.price) this.priceMin = item.price;
             if (this.priceMax < item.price) this.priceMax = item.price;
             if (this.weightMin > item.weight) this.weightMin = item.weight;
             if (this.weightMax < item.weight) this.weightMax = item.weight;
+        });
+
+        // фильтруем по цене и весу
+        this.getBegunokCurVal();
+
+        if (this.curPriceMax === 0) this.curPriceMax = this.priceMax;
+        if (this.curWeightMax === 0) this.curWeightMax = this.weightMax;
+        //console.log(newProduct.length, this.curPriceMin, this.curPriceMax, this.curWeightMin, this.curWeightMax);
+        newProduct = newProduct.filter((item) =>
+            this.filterPriceWeight(
+                item,
+                Math.max(this.priceMin, this.curPriceMin),
+                Math.min(this.priceMax, this.curPriceMax),
+                Math.max(this.weightMin, this.curWeightMin),
+                Math.min(this.weightMax, this.curWeightMax)
+            )
+        );
+
+        // считаем текущие кол-ва товаров рядом с чекбоксами
+        console.log('до', this.categoriesNCur);
+        this.categoriesNCur.fill(0);
+        this.brandsNCur.fill(0);
+        newProduct.forEach((item: IProduct) => {
             let n = this.categories.indexOf(item.category);
             this.categoriesNCur[n] += 1;
             n = this.brands.indexOf(item.brand);
             this.brandsNCur[n] += 1;
         });
+        console.log('после', this.categoriesNCur);
 
-        this.getBegunokCurVal();
-        if (this.priceMaxCur === 0) this.priceMaxCur = this.priceMax;
-        if (this.weightMaxCur === 0) this.weightMaxCur = this.weightMax;
-        console.log(newProduct.length, this.priceMinCur, this.priceMaxCur, this.weightMinCur, this.weightMaxCur);
-        newProduct = newProduct.filter((item) =>
-            this.filterPriceWeight(
-                item,
-                Math.max(this.priceMin, this.priceMinCur),
-                Math.min(this.priceMax, this.priceMaxCur),
-                Math.max(this.weightMin, this.weightMinCur),
-                Math.min(this.weightMax, this.weightMaxCur)
-            )
-        );
-        console.log(newProduct.length);
         this.pages = Math.ceil(newProduct.length / this.productInPage);
         this.currentPage = route.page;
         if (this.currentPage > this.pages) {
@@ -161,33 +189,7 @@ class ProductsList {
         return newProduct;
     }
 
-    viewSetBorder(view: string) {
-        // рисуем рамки вокруг типа обзора
-        if (this.b_view_1 !== null && this.b_view_2 !== null) {
-            if (view === 'plitka1') {
-                this.b_view_1.style.border = '1px solid gray';
-                this.b_view_2.style.border = '0px';
-            } else {
-                this.b_view_2.style.border = '1px solid gray';
-                this.b_view_1.style.border = '0px';
-            }
-        }
-    }
-
-    setSortOder(sort: string): void {
-        /* изменили порядок сортировки */
-        this.sortOder = sort;
-        this.data = this.formData();
-        this.draw();
-    }
-    setPage(page: number): void {
-        /* выбрали новую страницу */
-        this.currentPage = page;
-        this.data = this.formData();
-        this.draw();
-        this.drawPages();
-    }
-
+    // --------------------------- фильтры ------------------------
     filterCat(item: IProduct, arr: number[]): boolean {
         /* функция используется в фильтре товаров по выбранным категориям */
         const pos = this.categories.indexOf(item.category);
@@ -207,6 +209,7 @@ class ProductsList {
         return false;
     }
 
+    // ------------------------ сортировки -------------------------
     weightUp(a: IProduct, b: IProduct): number {
         return a.weight > b.weight ? 1 : -1;
     }
@@ -222,7 +225,28 @@ class ProductsList {
     idUp(a: IProduct, b: IProduct): number {
         return a.id > b.id ? 1 : -1;
     }
-    setCheckbox(cloneElem: HTMLElement, title: string, idx: number, type: string): HTMLElement {
+
+    // ------------------- клики по кнопкам (страница новая, сортировка) -------------------
+    setSortOder(sort: string): void {
+        /* изменили порядок сортировки */
+        this.sortOder = sort;
+        this.data = this.formData();
+        this.draw();
+    }
+    setPage(page: number): void {
+        /* выбрали новую страницу */
+        this.currentPage = page;
+        this.data = this.formData();
+        this.draw();
+        this.drawPages();
+    }
+    setView(view: string): void {
+        this.view = view;
+        this.draw();
+    }
+
+    // -------------------  отрисовки --------------------------
+    drawCheckbox(cloneElem: HTMLElement, title: string, idx: number, type: string): HTMLElement {
         const checkbox: HTMLInputElement | null = cloneElem.querySelector(`.${type}__checkbox`);
         const checkboxId = type + idx.toString();
         if (checkbox) checkbox.id = checkboxId;
@@ -248,7 +272,7 @@ class ProductsList {
                 obj.route.setCheckBox(idx, type, this.checked);
                 obj.moveBegunokToStart();
                 obj.data = obj.formData();
-                obj.setCheckboxValues();
+                obj.drawCheckboxValues();
                 obj.draw();
                 obj.drawPages();
             });
@@ -256,7 +280,7 @@ class ProductsList {
         return cloneElem;
     }
 
-    setCheckboxValues(): void {
+    drawCheckboxValues(): void {
         /* вывод значений после фильтра около рубрик и брендов */
         let elems = document.getElementsByClassName('brand__num');
         let i = 0;
@@ -270,10 +294,6 @@ class ProductsList {
             elem.innerHTML = ' (' + String(this.categoriesN[i]) + ' / ' + String(this.categoriesNCur[i]) + ') ';
             i += 1;
         }
-    }
-    setView(view: string): void {
-        this.view = view;
-        this.draw();
     }
 
     draw(): void {
@@ -342,7 +362,7 @@ class ProductsList {
                 }
             }
         }
-        this.viewSetBorder(this.view);
+        this.drawViewButtonBorder(this.view);
 
         // отображаем макс и мин бегунков
         tmp = document.getElementById('nPriceMin');
@@ -364,13 +384,13 @@ class ProductsList {
         if (categoryItemTemp) {
             this.categories.forEach((item: string, idx: number) => {
                 const catClone = categoryItemTemp.content.cloneNode(true) as HTMLElement;
-                fragmentCat.append(this.setCheckbox(catClone, item, idx, 'category'));
+                fragmentCat.append(this.drawCheckbox(catClone, item, idx, 'category'));
             });
         }
         if (brandItemTemp) {
             this.brands.forEach((item: string, idx: number) => {
                 const brandClone = brandItemTemp.content.cloneNode(true) as HTMLElement;
-                fragmentBrand.append(this.setCheckbox(brandClone, item, idx, 'brand'));
+                fragmentBrand.append(this.drawCheckbox(brandClone, item, idx, 'brand'));
             });
         }
 
@@ -409,6 +429,20 @@ class ProductsList {
         }
     }
 
+    drawViewButtonBorder(view: string) {
+        // рисуем рамки вокруг типа обзора
+        if (this.b_view_1 !== null && this.b_view_2 !== null) {
+            if (view === 'plitka1') {
+                this.b_view_1.style.border = '1px solid gray';
+                this.b_view_2.style.border = '0px';
+            } else {
+                this.b_view_2.style.border = '1px solid gray';
+                this.b_view_1.style.border = '0px';
+            }
+        }
+    }
+
+    // -------------------  функции  слайдера --------------------------
     moveRange(elem: HTMLElement) {
         /*Находим нужный элемент по классу или id*/
         const coords = getCoords(elem);
@@ -455,19 +489,10 @@ class ProductsList {
             return false;
         };
         const obj = this;
+
         function onMouseMove(e: MouseEvent) {
-            /*Определяем смещение влево*/
-            e.preventDefault(); //предотвратить запуск выделения элементов
-            /*Определяем положение мыши в зависимости от устройства*/
-            /*На мобильных устройствах может фиксироваться несколько точек касания, поэтому используется массив targetTouches*/
-            /*Мы будем брать только первое зафиксированое касание по экрану targetTouches[0]*/
-            //let pos: number;
-            //if (e.touches === undefined) {
+            console.log('mousemove');
             const pos = e.clientX;
-            /* } else {
-                pos = e.targetTouches[0].clientX;
-            }*/
-            /*Устанавливаем границы движения ползунка*/
             let newLeft = pos - parent.coords.leftX;
             const rigthEdge = parent.coords.width - (coords.width + 1);
 
@@ -476,13 +501,10 @@ class ProductsList {
             } else if (newLeft > rigthEdge) {
                 newLeft = rigthEdge;
             }
-            if (f === 0 && pos > block2.coords.left - block2.coords.width) {
+            if (f === 0 && pos > block2.coords.left - block2.coords.width)
                 newLeft = block2.coords.left - block2.coords.width - 5 - parent.coords.leftX;
-                console.log('newLeft', newLeft);
-            } else if (f === 1 && pos < block2.coords.rigth + 5) {
-                newLeft = block2.coords.rigth + 5 - parent.coords.leftX;
-                console.log('newLeft2', newLeft);
-            }
+            else if (f === 1 && pos < block2.coords.rigth + 5) newLeft = block2.coords.rigth + 5 - parent.coords.leftX;
+
             /*устанавливаем отступ нашему элементу*/
             elem.style.left = newLeft + 'px';
 
@@ -511,15 +533,8 @@ class ProductsList {
             indicator.style.fontSize = '11px';
             indicator.style.left = -coords.width / 2 + 'px';
             indicator.style.color = '#861806';
-            indicator.style.top = parseFloat(window.getComputedStyle(elem).getPropertyValue('top')) - 18 + 'px';
-            /*Для красоты слайдера уберем вывод значений в начальной и конечной точках*/
-            if (newLeft <= 0) {
-                indicator.innerHTML = '';
-            } else if (newLeft >= rigthEdge) {
-                indicator.innerHTML = '';
-            } else {
-                indicator.innerHTML = value;
-            }
+            indicator.style.top = parseFloat(window.getComputedStyle(elem).getPropertyValue('top')) + 42 + 'px';
+            indicator.innerHTML = value;
 
             /*Делаем цветную плашечку диапазона выбора*/
             if (f == 0) {
@@ -535,12 +550,15 @@ class ProductsList {
         function onMouseUp() {
             console.log('hi');
             obj.data = obj.formData();
+            obj.drawCheckboxValues();
+            obj.route.setBoundaries(obj.curPriceMin, obj.curPriceMax, 'price');
+            obj.route.setBoundaries(obj.curWeightMin, obj.curWeightMax, 'weight');
             obj.draw();
             obj.drawPages();
             document.removeEventListener('mouseup', onMouseUp);
             document.removeEventListener('mousemove', onMouseMove);
             document.removeEventListener('touchend', onMouseUp);
-            //document.removeEventListener('touchmove', onMouseMove);
+            // document.removeEventListener('touchmove', onMouseMove);
         }
     }
     moveBegunokToStart() {
@@ -574,36 +592,92 @@ class ProductsList {
             tmp.style.left = '15px';
             tmp.style.width = '97%';
         }
-        this.priceMinCur = 0;
-        this.priceMaxCur = 0;
-        this.weightMinCur = 0;
-        this.weightMaxCur = 0;
+        this.curPriceMin = 0;
+        this.curPriceMax = 0;
+        this.curWeightMin = 0;
+        this.curWeightMax = 0;
     }
     getBegunokCurVal() {
         let tmp: HTMLElement | null;
         if (this.priceMinE !== null) {
             const tmp = this.priceMinE.getElementsByTagName('div')[0];
-            if (tmp !== null && tmp !== undefined) this.priceMinCur = +tmp.innerHTML;
+            if (tmp !== null && tmp !== undefined) this.curPriceMin = +tmp.innerHTML;
         }
         if (this.priceMaxE !== null) {
             tmp = this.priceMaxE.getElementsByTagName('div')[0];
-            if (tmp !== null && tmp !== undefined) this.priceMaxCur = +tmp.innerHTML;
+            if (tmp !== null && tmp !== undefined) this.curPriceMax = +tmp.innerHTML;
         }
         if (this.weightMinE !== null) {
             tmp = this.weightMinE.getElementsByTagName('div')[0];
-            if (tmp !== null && tmp !== undefined) this.weightMinCur = +tmp.innerHTML;
+            if (tmp !== null && tmp !== undefined) this.curWeightMin = +tmp.innerHTML;
         }
         if (this.weightMaxE !== null) {
             const tmp = this.weightMaxE.getElementsByTagName('div')[0];
-            if (tmp !== null && tmp !== undefined) this.weightMaxCur = +tmp.innerHTML;
+            if (tmp !== null && tmp !== undefined) this.curWeightMax = +tmp.innerHTML;
         }
+    }
+
+    setBegunokPos(pMin: number, pMax: number, wMin: number, wMax: number) {
+        let k1 = 0;
+        let k2 = 0;
+        if (this.weightRange !== null && this.weightMinE !== null && this.weightMaxE !== null) {
+            const coor = this.weightRange.getBoundingClientRect();
+            if (wMin > this.weightMin) {
+                k1 = (wMin - this.weightMin) / (this.weightMax - this.weightMin);
+                this.weightMinE.style.left = k1 * coor.width + 'px';
+            }
+            if (wMax < this.weightMax) {
+                k2 = (wMax - this.weightMin) / (this.weightMax - this.weightMin);
+                this.weightMaxE.style.left = k2 * coor.width + 'px';
+            }
+            if (k1 > 0) this.weightRange.style.left = k1 * coor.width + 'px';
+            if (k2 > 0) this.weightRange.style.width = (k2 - k1) * coor.width + 'px';
+        }
+        k1 = 0;
+        k2 = 0;
+        if (this.priceRange !== null && this.priceMaxE !== null && this.priceMinE !== null) {
+            const coor = this.priceRange.getBoundingClientRect();
+            if (pMin > this.priceMin) {
+                k1 = (pMin - this.priceMin) / (this.priceMax - this.priceMin);
+                this.priceMinE.style.left = k1 * coor.width + 'px';
+            }
+            if (pMax < this.priceMax) {
+                k2 = (pMax - this.priceMin) / (this.priceMax - this.priceMin);
+                this.priceMaxE.style.left = k2 * coor.width + 'px';
+            }
+            if (k1 > 0) this.priceRange.style.left = k1 * coor.width + 'px';
+            if (k2 > 0) this.priceRange.style.width = (k2 - k1) * coor.width + 'px';
+        }
+
+        function setPosOne(elem: HTMLElement, val: number) {
+            const coords = getCoords(elem);
+            let tmp = document.createElement('div');
+            if (elem.childElementCount <= 0) {
+                elem.appendChild(tmp);
+            } else tmp = elem.getElementsByTagName('div')[0];
+            if (tmp !== null && tmp !== undefined) {
+                tmp.style.position = 'absolute';
+                tmp.style.fontSize = '11px';
+                tmp.style.left = -coords.width / 2 + 'px';
+                tmp.style.color = '#861806';
+                tmp.style.top = parseFloat(window.getComputedStyle(elem).getPropertyValue('top')) + 42 + 'px';
+            }
+            if (tmp !== null && tmp !== undefined) tmp.innerHTML = String(val);
+        }
+        let elem = this.priceMinE;
+        if (elem !== null) setPosOne(elem, pMin);
+        elem = this.priceMaxE;
+        if (elem !== null) setPosOne(elem, pMax);
+        elem = this.weightMinE;
+        if (elem !== null) setPosOne(elem, wMin);
+        elem = this.weightMaxE;
+        if (elem !== null) setPosOne(elem, wMax);
     }
 }
 
 function getCoords(elem: HTMLElement) {
     /*Получаем координаты относительно окна браузера*/
     const coords = elem.getBoundingClientRect();
-    /*Высчитываем значения координат относительно документа, вычисляя прокрутку документа*/
     return {
         top: coords.top + window.pageYOffset,
         left: coords.left + window.pageXOffset,
