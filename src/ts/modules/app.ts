@@ -5,17 +5,20 @@ import ProductDetails from './product-details/product-details';
 class App {
     route: Routes;
     productsList: ProductsList;
-    productDetails: ProductDetails;
+    productDetails: ProductDetails | null;
     constructor() {
         this.route = new Routes();
-        this.productsList = new ProductsList(this.route);
-        this.productsList.draw();
-        this.productsList.drawSide();
-        this.productsList.drawCheckboxValues();
-        this.productsList.drawPages();
-
-        this.productDetails = new ProductDetails(1);
-        this.productDetails.drawDetails();
+        this.productsList = new ProductsList(this.route, this);
+        this.productDetails = null;
+        if (this.route.product && this.route.product > -1) {
+            this.productDetails = new ProductDetails(this.route.product, this);
+            this.productDetails.drawDetails();
+        } else {
+            this.productsList.draw();
+            this.productsList.drawSide();
+            this.productsList.drawCheckboxValues();
+            this.productsList.drawPages();
+        }
     }
 }
 

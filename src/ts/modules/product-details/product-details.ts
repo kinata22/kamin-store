@@ -1,8 +1,7 @@
 import './product-details.scss';
 
 import { products } from '../../../assets/data/products';
-//import { IProduct, IParent } from '../../types/product';
-//import { Routes } from '../routes/routes';
+import App from '../app';
 
 class ProductDetail {
     //data: IProduct;
@@ -14,10 +13,11 @@ class ProductDetail {
     brand: string;
     img: string[];
     desc?: string;
+    app: App;
 
-    constructor(id: number) {
+    constructor(id: number, app: App) {
         this.id = id;
-        const data = products.filter((x) => (x.id = this.id))[0];
+        const data = products.filter((x) => x.id === this.id)[0];
         this.name = data.name;
         this.price = data.price;
         this.category = data.category;
@@ -25,10 +25,15 @@ class ProductDetail {
         this.brand = data.brand;
         this.img = data.img;
         this.desc = data.desc;
-        console.log(data);
+        this.app = app;
     }
 
     drawDetails() {
+        let tmp: HTMLElement | null = document.querySelector('.page-product-list');
+        if (tmp) tmp.style.display = 'none';
+        tmp = document.querySelector('.page-product-detail');
+        if (tmp) tmp.style.display = 'block';
+
         const title: HTMLElement | null = document.querySelector('.title');
         if (title) title.textContent = this.name;
         //console.log(this.name);

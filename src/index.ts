@@ -1,5 +1,5 @@
 import './sass/main.scss';
-// import { ICoords, IElemCoord } from './ts/types/product';
+//import ProductDetails from './ts/modules/product-details/product-details';
 
 import App from './ts/modules/app';
 const app = new App();
@@ -38,3 +38,8 @@ if (weightMin) {
 window.addEventListener('resize', function () {
     app.productsList.moveBegunokToStart();
 });
+
+window.onpopstate = function (event) {
+    console.log('location changed!', event);
+    location.reload();
+};

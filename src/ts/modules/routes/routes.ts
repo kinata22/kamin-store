@@ -9,8 +9,14 @@ export class Routes {
     weightTo: string;
     priceFrom: string;
     priceTo: string;
+    product: number;
     constructor() {
         this.url = new URL(window.location.href);
+        this.product = -1;
+        if (this.url.searchParams.has('product')) {
+            const tmp = this.url.searchParams.get('product');
+            if (typeof tmp === 'string') this.product = Number(tmp);
+        }
         this.sort = 'none';
         if (this.url.searchParams.has('sort')) {
             const tmp = this.url.searchParams.get('sort');
@@ -73,7 +79,6 @@ export class Routes {
         history.pushState({ page: this.url.search }, '', this.url.search);
     }
     setCheckBox(idx: number, type: string, checked: boolean) {
-        console.log('setCheckBox', this.cats);
         if (type === 'category') {
             const tmp = this.cats.indexOf(idx); // есть ли категория в уже выбранных
             const arrcat = this.url.searchParams.getAll('category'); // массив всех категорий из урл
@@ -145,5 +150,25 @@ export class Routes {
 
         if (this.url.search === '') history.pushState({}, '', 'index.html');
         else history.pushState({}, '', this.url.search);
+    }
+    goProductPage(id: string) {
+        this.clear();
+        this.url.searchParams.set('product', id);
+        history.pushState({ page: this.url.search }, '', this.url.search);
+    }
+    clear() {
+        this.url.searchParams.delete('category');
+        this.url.searchParams.delete('brand');
+        this.url.searchParams.delete('weightFrom');
+        this.url.searchParams.delete('weightTo');
+        this.url.searchParams.delete('priceFrom');
+        this.url.searchParams.delete('priceTo');
+        this.cats.length = 0;
+        this.brands.length = 0;
+        this.weightFrom = '';
+        this.weightTo = '';
+        this.priceFrom = '';
+        this.priceTo = '';
+        history.pushState({}, '', 'index.html');
     }
 }

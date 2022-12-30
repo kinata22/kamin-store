@@ -3,6 +3,8 @@ import './products-list.scss';
 import { products } from '../../../assets/data/products';
 import { IProduct, IParent } from '../../types/product';
 import { Routes } from '../routes/routes';
+import ProductDetail from '../product-details/product-details';
+import App from '../app';
 
 class ProductsList {
     data: Array<IProduct>;
@@ -44,8 +46,12 @@ class ProductsList {
     curWeightMin: number;
     curWeightMax: number;
 
-    constructor(route: Routes) {
+    clearAll: HTMLElement | null;
+    app: App;
+
+    constructor(route: Routes, app: App) {
         this.route = route;
+        this.app = app;
         // запоминаем элементы слайдеров
         this.priceSlider = document.getElementById('priceSlider');
         this.weightSlider = document.getElementById('weightSlider');
@@ -113,6 +119,14 @@ class ProductsList {
             this.drawViewButtonBorder(route.view);
         }
 
+        this.clearAll = document.getElementById('clearall');
+        if (this.clearAll) {
+            const obj = this;
+            this.clearAll.addEventListener('click', function () {
+                obj.clear();
+            });
+        }
+
         // формируем массив товаров по условиям
         this.data = this.formData();
         if (this.weightMinE) console.log('end constr', this.weightMinE.style.left);
@@ -155,7 +169,6 @@ class ProductsList {
 
         if (this.curPriceMax === 0) this.curPriceMax = this.priceMax;
         if (this.curWeightMax === 0) this.curWeightMax = this.weightMax;
-        //console.log(newProduct.length, this.curPriceMin, this.curPriceMax, this.curWeightMin, this.curWeightMax);
         newProduct = newProduct.filter((item) =>
             this.filterPriceWeight(
                 item,
@@ -167,7 +180,6 @@ class ProductsList {
         );
 
         // считаем текущие кол-ва товаров рядом с чекбоксами
-        console.log('до', this.categoriesNCur);
         this.categoriesNCur.fill(0);
         this.brandsNCur.fill(0);
         newProduct.forEach((item: IProduct) => {
@@ -176,7 +188,6 @@ class ProductsList {
             n = this.brands.indexOf(item.brand);
             this.brandsNCur[n] += 1;
         });
-        console.log('после', this.categoriesNCur);
 
         this.pages = Math.ceil(newProduct.length / this.productInPage);
         this.currentPage = route.page;
@@ -342,8 +353,15 @@ class ProductsList {
             if (btnAddToCart) btnAddToCart.dataset.id = item.id.toString();
 
             const btnDetails: HTMLButtonElement | null = productsClone.querySelector('.products__item-details');
-            if (btnDetails) btnDetails.dataset.id = item.id.toString();
-
+            if (btnDetails) {
+                const obj = this;
+                btnDetails.dataset.id = item.id.toString();
+                btnDetails.addEventListener('click', function () {
+                    obj.route.goProductPage(item.id.toString());
+                    obj.app.productDetails = new ProductDetail(item.id, obj.app);
+                    obj.app.productDetails.drawDetails();
+                });
+            }
             if (fragment) fragment.append(productsClone);
         });
 
@@ -536,7 +554,7 @@ class ProductsList {
             indicator.style.top = parseFloat(window.getComputedStyle(elem).getPropertyValue('top')) + 42 + 'px';
             indicator.innerHTML = value;
 
-            /*Делаем цветную плашечку диапазона выбора*/
+            /*Делаем плашечку диапазона выбора*/
             if (f == 0) {
                 colorRange.style.left = newLeft + coords.width + 'px';
                 colorRange.style.width = block2.coords.left - getCoords(elem).left - coords.width + 'px';
@@ -548,7 +566,6 @@ class ProductsList {
         }
 
         function onMouseUp() {
-            console.log('hi');
             obj.data = obj.formData();
             obj.drawCheckboxValues();
             obj.route.setBoundaries(obj.curPriceMin, obj.curPriceMax, 'price');
@@ -558,7 +575,6 @@ class ProductsList {
             document.removeEventListener('mouseup', onMouseUp);
             document.removeEventListener('mousemove', onMouseMove);
             document.removeEventListener('touchend', onMouseUp);
-            // document.removeEventListener('touchmove', onMouseMove);
         }
     }
     moveBegunokToStart() {
@@ -596,6 +612,12 @@ class ProductsList {
         this.curPriceMax = 0;
         this.curWeightMin = 0;
         this.curWeightMax = 0;
+        this.route.weightFrom = '';
+        this.route.weightTo = '';
+        this.route.priceFrom = '';
+        this.route.priceTo = '';
+        this.route.setBoundaries(0, 0, 'price');
+        this.route.setBoundaries(0, 0, 'weight');
     }
     getBegunokCurVal() {
         let tmp: HTMLElement | null;
@@ -672,6 +694,26 @@ class ProductsList {
         if (elem !== null) setPosOne(elem, wMin);
         elem = this.weightMaxE;
         if (elem !== null) setPosOne(elem, wMax);
+    }
+    clear() {
+        this.route.clear;
+        this.route.weightFrom = '';
+        this.route.weightTo = '';
+        this.route.priceFrom = '';
+        this.route.priceTo = '';
+        this.route.cats.length = 0;
+        this.route.brands.length = 0;
+        history.pushState({}, '', 'index.html');
+        this.currentPage = 0;
+        this.curPriceMin = this.mainPriceMin;
+        this.curPriceMax = this.mainPriceMax;
+        this.curWeightMin = this.mainWeightMin;
+        this.curWeightMax = this.mainWeightMax;
+        this.moveBegunokToStart();
+        this.data = this.formData();
+        this.drawSide();
+        this.draw();
+        this.drawPages();
     }
 }
 
