@@ -34,6 +34,17 @@ class ProductDetail {
         tmp = document.querySelector('.page-product-detail');
         if (tmp) tmp.style.display = 'block';
 
+        // breadcrumps
+        const linksCategory: HTMLImageElement | null = document.querySelector('.details-links-category');
+        if (linksCategory) linksCategory.textContent = this.category;
+
+        const linksBrand: HTMLImageElement | null = document.querySelector('.details-links-brand');
+        if (linksBrand) linksBrand.textContent = this.brand ?? '';
+
+        const linksName: HTMLImageElement | null = document.querySelector('.details-links-name');
+        if (linksName) linksName.textContent = this.name;
+
+        // product details
         const title: HTMLElement | null = document.querySelector('.title');
         if (title) title.textContent = this.name;
         //console.log(this.name);
@@ -50,6 +61,11 @@ class ProductDetail {
 
             const image = document.createElement('img');
             image.src = `./images/${this.img[idx]}`;
+
+            image.addEventListener('click', function () {
+                const mainImage: HTMLImageElement | null = document.querySelector('.picture-main');
+                if (mainImage) mainImage.src = image.src;
+            });
 
             div.appendChild(image);
             imagesContainer?.appendChild(div);
