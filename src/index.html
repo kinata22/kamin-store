@@ -1,204 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="./images/favicon.ico" />
-  <title>Online store</title>
-  <meta http-equiv='cache-control' content='no-cache, no-store, must-revalidate'>
-  <meta http-equiv='expires' content='0'>
-  <meta http-equiv='pragma' content='no-cache'>
-</head>
-<body>
-  <header>
-    <div class="container header__wrap">
-      <div class="header__logo">
-        <a class="header__logo-link" href="./index.html">
-          <img class="logo" src='./images/pro_kamin_logo.svg' alt="Logo" />
-        </a>
-      </div>
-      <div class="header__center">
-        <div class="cart-price">
-          <span class="cart-price__label">Cart total:</span>
-          <span class="cart-price__price">$0</span>
-        </div>
-      </div>
-      <div class="header__cart">
-        <div class="b-cart-button__wrapper">
-          <span class="b-cart-button__icon"><img class="cart-icon" src='./images/shopping-cart.png' alt="Shopping cart" /></span>
-          <span class="b-cart-button__counter">0</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="page-product-list">
-      <aside>
-        <div class="clearall">
-          <button id="clearall" >Clear parameters</button>
-        </div>
-
-        <div class="filters">
-          <div class="filters__title">Price</div>
-          <div class="filters__price box filter">
-              <div>
-                  <div><span id="nPriceMin">10</span><span id="nPriceMax">50</span></div>
-                  <div class="slider" id="priceSlider">
-                      <div class="block-min" id="priceMin"><div></div></div>
-                      <div class="color-range" id="priceRange"></div>
-                      <div class="block-max" id="priceMax"><div></div></div>
-                  </div>
-              </div>
-          </div>
-          <div class="filters__title">Weight</div>
-          <div class="filters__weight box filter">
-            <div>
-              <div><span id="nWeightMin">0</span><span id="nWeightMax">5</span></div>
-              <div class="slider"  id="weightSlider">
-                  <div class="block-min" id="weightMin"><div></div></div>
-                  <div class="color-range" id="weightRange"></div>
-                  <div class="block-max" id="weightMax"><div></div></div>
-              </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="./images/favicon.ico" />
+        <title>Online store</title>
+        <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="pragma" content="no-cache" />
+    </head>
+    <body>
+        <header>
+            <div class="container header__wrap">
+                <div class="header__logo">
+                    <a class="header__logo-link" href="./index.html">
+                        <img class="logo" src="./images/pro_kamin_logo.svg" alt="Logo" />
+                    </a>
+                </div>
+                <div class="header__center">
+                    <div class="cart-price">
+                        <span class="cart-price__label">Cart total:</span>
+                        <span class="cart-price__price">$0</span>
+                    </div>
+                </div>
+                <div class="header__cart" id="cart">
+                    <div class="b-cart-button__wrapper">
+                        <span class="b-cart-button__icon"
+                            ><img class="cart-icon" src="./images/shopping-cart.png" alt="Shopping cart"
+                        /></span>
+                        <span class="b-cart-button__counter">0</span>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="filters__title">Category</div>
-          <div class="filters__category box"></div>
-          <div class="filters__title">Brand</div>
-          <div class="filters__brand box"></div>
+        </header>
 
-      </div>
-      </aside>
-      <section class="product-list">
-        <div class="sort" style="display:flex">
-          <div class="product-sort">
-            <label>Sort by:</label>
-            <select>
-              <option value="none">As is</option>
-              <option value="pup">Sort by price ASC</option>
-              <option value="pdown">Sort by price DESC</option>
-              <option value="wup">Sort by weight ASC</option>
-              <option value="wdown">Sort by weight DESC</option>
-            </select>
-          </div>
-          <div class="product-view">
-            <button id="plitka1" class="product-view-button"><img src="images/plitka1.png" alt="Плитка"></button>
-            <button id="plitka2" class="product-view-button"><img src="images/plitka2.png" alt="Крупная плитка" ></button>
-          </div>
-        </div>
+        <main>
+            <div class="page-product-list">
+                <aside>
+                    <div class="clearall">
+                        <button id="clearall">Clear parameters</button>
+                    </div>
 
-        <div class="products" id="products"></div>
-        <div class="product-pagination"  id="pagination">
-        </div>
-      </section>
-    </div>
+                    <div class="filters">
+                        <div class="filters__title">Price</div>
+                        <div class="filters__price box filter">
+                            <div>
+                                <div><span id="nPriceMin">10</span><span id="nPriceMax">50</span></div>
+                                <div class="slider" id="priceSlider">
+                                    <div class="block-min" id="priceMin"><div></div></div>
+                                    <div class="color-range" id="priceRange"></div>
+                                    <div class="block-max" id="priceMax"><div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters__title">Weight</div>
+                        <div class="filters__weight box filter">
+                            <div>
+                                <div><span id="nWeightMin">0</span><span id="nWeightMax">5</span></div>
+                                <div class="slider" id="weightSlider">
+                                    <div class="block-min" id="weightMin"><div></div></div>
+                                    <div class="color-range" id="weightRange"></div>
+                                    <div class="block-max" id="weightMax"><div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filters__title">Category</div>
+                        <div class="filters__category box"></div>
+                        <div class="filters__title">Brand</div>
+                        <div class="filters__brand box"></div>
+                    </div>
+                </aside>
+                <section class="product-list">
+                    <div class="sort" style="display: flex">
+                        <div class="product-sort">
+                            <label>Sort by:</label>
+                            <select>
+                                <option value="none">As is</option>
+                                <option value="pup">Sort by price ASC</option>
+                                <option value="pdown">Sort by price DESC</option>
+                                <option value="wup">Sort by weight ASC</option>
+                                <option value="wdown">Sort by weight DESC</option>
+                            </select>
+                        </div>
+                        <div class="product-view">
+                            <button id="plitka1" class="product-view-button">
+                                <img src="images/plitka1.png" alt="Плитка" />
+                            </button>
+                            <button id="plitka2" class="product-view-button">
+                                <img src="images/plitka2.png" alt="Крупная плитка" />
+                            </button>
+                        </div>
+                    </div>
 
-    <div class="page-product-detail"  style="display:none">
-      <div class="product-detail-container">
-        <div class="details-links">
-          <a href="./index.html" class="details-links-home">Store</a>
-          <span>&gt;</span>
-          <span class="details-links-category"></span>
-          <span>&gt;</span>
-          <span class="details-links-brand"></span>
-          <span>&gt;</span>
-          <span class="details-links-name"></span>
-        </div>
-        <h1 class="title"></h1>
-        <div class="product-card">
-          <div class="product-pictures flex-column">
-            <div class="picture-main-container">
-              <img id="product-picture-main" class="picture-main" src="" alt="Main picture">
+                    <div class="products" id="products"></div>
+                    <div class="product-pagination" id="pagination"></div>
+                </section>
             </div>
-            <div class="pictures-gallery">
+
+            <div class="page-product-detail" style="display: none">
+                <div class="product-detail-container">
+                    <div class="details-links">
+                        <a href="./index.html" class="details-links-home">Store</a>
+                        <span>&gt;</span>
+                        <span class="details-links-category"></span>
+                        <span>&gt;</span>
+                        <span class="details-links-brand"></span>
+                        <span>&gt;</span>
+                        <span class="details-links-name"></span>
+                    </div>
+                    <h1 class="title"></h1>
+                    <div class="product-card">
+                        <div class="product-pictures flex-column">
+                            <div class="picture-main-container">
+                                <img id="product-picture-main" class="picture-main" src="" alt="Main picture" />
+                            </div>
+                            <div class="pictures-gallery"></div>
+                        </div>
+                        <div class="product-info flex-column">
+                            <div class="product-price-box">
+                                <span class="card-label">Price:</span> <span class="product-price"></span>
+                            </div>
+                            <div class="product-weight-box">
+                                <span class="card-label">Weight:</span> <span class="product-weight"></span>
+                            </div>
+                            <div class="product-id" style="display: none"></div>
+                            <div class="product-category-box">
+                                <span class="card-label">Category:</span>
+                                <span class="product-category"></span>
+                            </div>
+                            <div class="product-brand-box">
+                                <span class="card-label">Brand:</span> <span class="product-brand"></span>
+                            </div>
+                            <div class="product-desc-block">
+                                <span class="card-label">Description:</span>
+                                <p class="product-desc"></p>
+                            </div>
+                            <div class="product-buttons">
+                                <button class="product-add-to-card" id="product-add-to-card">Add to card</button>
+                                <button class="product-buy-now" data-id="">Buy now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="product-info flex-column">
-            <div class="product-price-box"><span class="card-label">Price:</span> <span class="product-price"></span></div>
-            <div class="product-weight-box"><span class="card-label">Weight:</span> <span class="product-weight"></span></div>
-            <div class="product-id" style="display:none"></div>
-            <div class="product-category-box">
-              <span class="card-label">Category:</span> 
-              <span class="product-category"></span>
+
+            <div class="page-cart" style="display: none">
+                <h1>Cart</h1>
+                <div class="cartList" id="cartList"></div>
+                <div class="cartEnd">
+                    <div class="cartEnd__price" id="priceE"></div>
+                </div>
             </div>
-            <div class="product-brand-box"><span class="card-label">Brand:</span> <span class="product-brand"></span></div>
-            <div class="product-desc-block">
-              <span class="card-label">Description:</span>
-              <p class="product-desc"></p>
+        </main>
+
+        <footer>
+            <div class="container footer__container">
+                <a class="footer__rs-link" href="https://github.com/kinata22" target="_blank">
+                    <img class="footer__image" src="./images/logo-github.png" alt="Github icon" />
+                </a>
+                <span>&copy; 2022</span>
+                <a class="footer__github-link" href="https://rs.school/js/" target="_blank">
+                    <img class="footer__image" src="./images/logo_rs_text.svg" alt="RS School icon" />
+                </a>
             </div>
-            <div class="product-buttons">
-              <button class="product-add-to-card" data-id="">Add to card</button>
-              <button class="product-buy-now" data-id="">Buy now</button>
+        </footer>
+
+        <template id="productsItemTemp">
+            <div class="products__item">
+                <div class="products__item-image-box">
+                    <img class="products__item-image" src="" alt="Product image" />
+                </div>
+                <div class="products__info">
+                    <div class="products__item-name"></div>
+                    <div class="products__item-price-box">Price: <span class="products__item-price"></span></div>
+                    <div class="products__item-id"></div>
+                    <div class="products__item-category-box">
+                        Category:
+                        <span class="products__item-category"></span>
+                    </div>
+                    <div class="products__item-weight-box">Weight: <span class="products__item-weight"></span></div>
+                    <div class="products__item-brand-box">Brand: <span class="products__item-brand"></span></div>
+                </div>
+                <div class="products__item-buttons">
+                    <button class="products__item-add-to-card" id="">Add to card</button>
+                    <button class="products__item-details" data-id="">Details</button>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="page-cart">
-    </div>
-
-    <div class="page-404">
-    </div>
-  </main>
-
-  <footer>
-    <div class="container footer__container">
-      <a class="footer__rs-link" href="https://github.com/kinata22" target="_blank">
-        <img class="footer__image" src="./images/logo-github.png" alt="Github icon">
-      </a>
-      <span>&copy; 2022</span>
-      <a class="footer__github-link" href="https://rs.school/js/" target="_blank">
-        <img class="footer__image" src="./images/logo_rs_text.svg" alt="RS School icon">
-      </a>
-    </div>
-  </footer>
-
-  <template id="productsItemTemp">
-    <div class="products__item">
-      <div class="products__item-image-box">
-        <img class="products__item-image" src="" alt="Product image">
-      </div>
-      <div class="products__info">
-        <div class="products__item-name"></div>
-        <div class="products__item-price-box">Price: <span class="products__item-price"></span></div>
-        <div class="products__item-id"></div>
-        <div class="products__item-category-box">
-          Category: 
-          <span class="products__item-category"></span>
-        </div>
-        <div class="products__item-weight-box">Weight: <span class="products__item-weight"></span></div>
-        <div class="products__item-brand-box">Brand: <span class="products__item-brand"></span></div>
-      </div>
-      <div class="products__item-buttons">
-        <button class="products__item-add-to-card" data-id="">Add to card</button>
-        <button class="products__item-details" data-id="">Details</button>
-      </div>
-    </div>
-  </template>
-  <template id="catsItemTemp">
-    <div class="filters__category-item">
-      <div class="filters__checkbox-line">
-        <input type="checkbox" class="category__checkbox" id="">
-        <label for="" class="category__label"></label>
-        <div class="filters__num">
-          <span class="category__num"></span>
-        </div>
-      </div>
-    </div>
-  </template>
-  <template id="brandsItemTemp">
-    <div class="filters__brand-item">
-      <div class="filters__checkbox-line">
-        <input type="checkbox" class="brand__checkbox" id="">
-        <label for="" class="brand__label"></label>
-        <div class="filters__num">
-          <span class="brand__num"></span>
-        </div>
-      </div>
-    </div>
-  </template>
-
-</body>
+        </template>
+        <template id="catsItemTemp">
+            <div class="filters__category-item">
+                <div class="filters__checkbox-line">
+                    <input type="checkbox" class="category__checkbox" id="" />
+                    <label for="" class="category__label"></label>
+                    <div class="filters__num">
+                        <span class="category__num"></span>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="brandsItemTemp">
+            <div class="filters__brand-item">
+                <div class="filters__checkbox-line">
+                    <input type="checkbox" class="brand__checkbox" id="" />
+                    <label for="" class="brand__label"></label>
+                    <div class="filters__num">
+                        <span class="brand__num"></span>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="cartItemTemp">
+            <div class="cart__items">
+                <div class="cart__item cart__item-num"></div>
+                <div class="cart__item cart__item-product"></div>
+                <div class="cart__item cart__item-count">
+                    <span class="cart__item-count-minus" id=""> - </span>
+                    <span class="cart__item-count-val" id=""></span>
+                    <span class="cart__item-count-plus" id=""> + </span>
+                </div>
+                <div class="cart__item cart__item-price"></div>
+            </div>
+        </template>
+    </body>
 </html>

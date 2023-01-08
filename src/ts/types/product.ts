@@ -6,6 +6,12 @@ export interface IProduct {
     weight: number;
     brand: string;
     img: string[];
+    quantity: number;
+}
+
+export interface IProductInCart {
+    product: IProduct;
+    n: number;
 }
 
 export interface ICoords {

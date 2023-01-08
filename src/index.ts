@@ -1,9 +1,9 @@
 import './sass/main.scss';
 //import ProductDetails from './ts/modules/product-details/product-details';
-
+console.log(123);
 import App from './ts/modules/app';
 const app = new App();
-
+console.log(123);
 const select = document.getElementsByTagName('select')[0];
 select.addEventListener('change', function () {
     app.route.setSortOder(this.value);
@@ -34,12 +34,16 @@ if (weightMin) {
         app.productsList.moveRange(this);
     });
 }
-
+const cartButton = document.getElementById('cart');
+if (cartButton) {
+    cartButton.addEventListener('click', function () {
+        window.location.href = 'index.html?cart=1';
+    });
+}
 window.addEventListener('resize', function () {
     app.productsList.moveBegunokToStart();
 });
 
-window.onpopstate = function (event) {
-    console.log('location changed!', event);
+window.onpopstate = function () {
     location.reload();
 };

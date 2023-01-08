@@ -31,8 +31,12 @@ class ProductDetail {
     drawDetails() {
         let tmp: HTMLElement | null = document.querySelector('.page-product-list');
         if (tmp) tmp.style.display = 'none';
+        tmp = document.querySelector('.page-cart');
+        if (tmp) tmp.style.display = 'none';
         tmp = document.querySelector('.page-product-detail');
         if (tmp) tmp.style.display = 'block';
+        const app = this.app;
+        const id = this.id;
 
         // breadcrumps
         const linksCategory: HTMLImageElement | null = document.querySelector('.details-links-category');
@@ -91,6 +95,14 @@ class ProductDetail {
 
         const descElement: HTMLElement | null = document.querySelector('.product-desc');
         if (descElement) descElement.textContent = this.desc ?? '';
+
+        const btnTmp: HTMLElement | null = document.getElementById('product-add-to-card');
+        if (btnTmp) {
+            btnTmp.addEventListener('click', function () {
+                console.log('detail', id, app.cart);
+                if (app.cart) app.cart.addProduct(id);
+            });
+        }
     }
 }
 
