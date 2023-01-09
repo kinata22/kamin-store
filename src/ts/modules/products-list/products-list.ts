@@ -333,19 +333,24 @@ class ProductsList {
 
             const htmlItemImage: HTMLImageElement | null = productsClone.querySelector('.products__item-image');
             if (htmlItemImage) htmlItemImage.src = imageSrc;
+            const htmlItemLink: HTMLAnchorElement | null = productsClone.querySelector('.products__item-link');
+            if (htmlItemLink) htmlItemLink.href = `index.html?product=${item.id}`;
 
-            const htmlItemName: HTMLImageElement | null = productsClone.querySelector('.products__item-name');
-            if (htmlItemName) htmlItemName.textContent = item.name;
+            const htmlItemName: HTMLAnchorElement | null = productsClone.querySelector('.products__item-name');
+            if (htmlItemName) {
+                htmlItemName.textContent = item.name;
+                htmlItemName.href = `index.html?product=${item.id}`;
+            }
 
             const priceFormatted = `$${item.price.toString()}`;
 
-            const htmlItemPrice: HTMLImageElement | null = productsClone.querySelector('.products__item-price');
+            const htmlItemPrice: HTMLElement | null = productsClone.querySelector('.products__item-price');
             if (htmlItemPrice) htmlItemPrice.textContent = priceFormatted;
 
-            const htmlItemId: HTMLImageElement | null = productsClone.querySelector('.products__item-id');
+            const htmlItemId: HTMLElement | null = productsClone.querySelector('.products__item-id');
             if (htmlItemId) htmlItemId.textContent = item.id.toString();
 
-            const htmlItemCategory: HTMLImageElement | null = productsClone.querySelector('.products__item-category');
+            const htmlItemCategory: HTMLElement | null = productsClone.querySelector('.products__item-category');
             if (htmlItemCategory) htmlItemCategory.textContent = item.category;
 
             const weightElement: HTMLElement | null = productsClone.querySelector('.products__item-weight');

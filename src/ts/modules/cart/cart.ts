@@ -124,8 +124,11 @@ class Cart {
                 const htmlNum: HTMLElement | null = templCur.querySelector('.cart__item-num');
                 if (htmlNum) htmlNum.textContent = String(i);
 
-                const htmlName: HTMLElement | null = templCur.querySelector('.cart__item-product');
-                if (htmlName) htmlName.textContent = item.product.name + ' (' + item.product.quantity + ' in stock)';
+                const htmlName: HTMLAnchorElement | null = templCur.querySelector('.cart__item-link');
+                if (htmlName) {
+                    htmlName.textContent = item.product.name + ' (' + item.product.quantity + ' in stock)';
+                    htmlName.href = `index.html?product=${item.product.id}`;
+                }
 
                 const htmlM: HTMLElement | null = templCur.querySelector('.cart__item-count-minus');
                 if (htmlM !== null) {
@@ -147,7 +150,6 @@ class Cart {
                                     currency: 'EUR',
                                 }).format(item.product.price * item.n);
                         }
-                        // obj.drawCart;
                     });
                 }
                 const htmlP: HTMLElement | null = templCur.querySelector('.cart__item-count-plus');
