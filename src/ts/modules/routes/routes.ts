@@ -10,12 +10,16 @@ export class Routes {
     priceFrom: string;
     priceTo: string;
     product: number;
+    cart: number;
     constructor() {
         this.url = new URL(window.location.href);
         this.product = -1;
+        this.cart = -1;
         if (this.url.searchParams.has('product')) {
             const tmp = this.url.searchParams.get('product');
             if (typeof tmp === 'string') this.product = Number(tmp);
+        } else if (this.url.searchParams.has('cart')) {
+            this.cart = 1;
         }
         this.sort = 'none';
         if (this.url.searchParams.has('sort')) {

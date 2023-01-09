@@ -1,18 +1,22 @@
 import { Routes } from './routes/routes';
 import ProductsList from './products-list/products-list';
-import ProductDetails from './product-details/product-details';
-
+import ProductDetail from './product-details/product-details';
+import Cart from './cart/cart';
 class App {
     route: Routes;
     productsList: ProductsList;
-    productDetails: ProductDetails | null;
+    productDetails: ProductDetail | null;
+    cart: Cart | null;
     constructor() {
         this.route = new Routes();
         this.productsList = new ProductsList(this.route, this);
         this.productDetails = null;
+        this.cart = new Cart(this);
         if (this.route.product && this.route.product > -1) {
-            this.productDetails = new ProductDetails(this.route.product, this);
+            this.productDetails = new ProductDetail(this.route.product, this);
             this.productDetails.drawDetails();
+        } else if (this.route.cart && this.route.cart === 1) {
+            this.cart.drawCart();
         } else {
             this.productsList.draw();
             this.productsList.drawSide();

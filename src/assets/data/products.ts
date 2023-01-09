@@ -7,6 +7,7 @@ type Product = {
     brand: string;
     img: string[];
     desc?: string;
+    quantity: number;
 };
 type Products = Product[];
 
@@ -21,6 +22,7 @@ export const products: Products = [
         img: ['53624.970.jpg', '53625.970.jpg', '53626.970.jpg', '53627.970.jpg', '53628.970.jpg', '59063.970.jpg'],
         desc: `External facing of soapstone or majolika. Enameled oven. Door, base and top-plate of cast-iron'
         Ceramic glass resistant up to 750°C`,
+        quantity: 3,
     },
     {
         name: 'La Nordica TermoRossella Plus Forno D.S.A',
@@ -32,6 +34,7 @@ export const products: Products = [
         img: ['53629.970.jpg', '53630.970.jpg', '53631.970.jpg', '53632.970.jpg', '53633.970.jpg', '59067.970.jpg'],
         desc: `Features: Exterior finish of the facade with majolica or natural stone • Removable firewood drawer • 
         Enamelled oven with panoramic glass • Air supply regulators for primary combustion, afterburning system and for glass cleaning`,
+        quantity: 43,
     },
     {
         name: 'Stove K900, soapstone (Keddy)',
@@ -43,6 +46,7 @@ export const products: Products = [
         img: ['71384.970.jpg', '71385.970.jpg', '71386.970.jpg'],
         desc: `The K900 is a new wood-burning stove that has everything to match the renowned quality of the Swedish company Keddy. Chrome-plated glass trim.
         Heating stove with panoramic glass with a viewing angle of 180 degrees.`,
+        quantity: 1,
     },
     {
         name: 'Stove VESTA, red (Plamen)',
@@ -57,6 +61,7 @@ export const products: Products = [
         tertiary jet of combustion air into the flue gasses allowing for enhanced combustion and increased efficiency.
         Preheated air is also injected into the combustion zone through Vesta’s rear primary air supply. The classic curved
         surfaces on the V8 double-sided add style and these arcs are carried on throughout the theme of the fire.`,
+        quantity: 2,
     },
     {
         name: 'Stove Warm CS rosso (EdilKamin)',
@@ -69,6 +74,7 @@ export const products: Products = [
         desc: `The elegance of enameled ceramic cladding / 2 colors to choose from: amber yellow and red / 
         in combination with modern Edilkamin wood burning stove technology. The side parts, the front part and
         the base are cast iron, the structure of the furnace and the hearth are steel. Door with vitroceramic glass, resistant to thermal shock up to 800°C.`,
+        quantity: 3,
     },
     {
         name: 'Stove MORSO 1010',
@@ -79,6 +85,7 @@ export const products: Products = [
         brand: 'Morso',
         img: ['25154.970.jpg', '25155.970.jpg', '25156.970.jpg', '25157.970.jpg'],
         desc: `Retaining the well-known Morsø details and straightforward operation, Morsø 1010 is a well known member of the family of small classic Morsø stoves. Naturally, the delightful atmosphere, that many of us remember as something quite unique from past campfires, will be provided by the large glass area. Morsø 1010 is carried out entirely in sturdy cast iron – the best imaginable material for woodburning stoves. Combustionwise, Morsø 1010 meets the strictest Danish environmental standards.`,
+        quantity: 4,
     },
     {
         name: 'Stove-Fireplace Jotul F 167',
@@ -89,6 +96,7 @@ export const products: Products = [
         brand: 'Jotul',
         img: ['24993.970.jpg', '24994.970.jpg', '24995.970.jpg', '24996.970.png'],
         desc: `Jøtul's F 167 log burning stove is part of the F 160 series which consists of five main variants, with or without side glasses and with different bases and features. The Jøtul F 167 woodstove is characterised by the large side glasses and the elegant placement on top of a pedestal which with time has become an award-winning signature design for Jøtul. You can place a top made from soapstone on this stove. This will provide extra heat retaining capacities and a slightly different look. The wood stove is designed for modern living and is suitable for low effect heating. It burns at an optimal level even at 3kW.`,
+        quantity: 35,
     },
     {
         name: 'Stove-Fireplace Jotul F 500 ECO BP',
@@ -99,6 +107,7 @@ export const products: Products = [
         brand: 'Jotul',
         img: ['25060.970.jpg', '25061.970.jpg'],
         desc: `Stove - fireplace Jotul F 500 ECO BP is a fairly powerful wood-burning stove, made in a classic style with large glass doors for observing the fire. Stove fireplace Jotul F 500 ECO BP - this stove is a novelty of the manufacturer, it differs from previous models JOTUL F 500 in the form of Gothic grates. The design of the firebox of the Jotul F 500 ECO BP fireplace stove ensures self-cleaning of glass from soot. It is possible to supply air from the street or adjacent premises.`,
+        quantity: 13,
     },
     {
         name: 'Stove-Fireplace Morso 2140',
@@ -110,6 +119,7 @@ export const products: Products = [
         img: ['25184.970.jpg', '25185.970.jpg', '25186.970.jpg', '25187.970.jpg', '25188.970.jpg', '25189.970.jpg'],
         desc: `Morsø’s 2140 is designed by Robin Levien from the well-known English design company Queensbury, Hunt & Levien (London). 2140 is a convection stove that is available with either the squirrel relief or ribbed sides.
         The Morsø 2140 wood-burning stove is ideal as the primary heat source for your home. The stove has an extra wide firebox, which means it can be fired with large logs. The large glass windows offer an excellent view of the fire. Morsø’s combustion system with airwash ensures that the glass always remains clean when the stove is correctly fired.`,
+        quantity: 3,
     },
     {
         name: 'Stove-Fireplace Morso 3142',
@@ -122,6 +132,7 @@ export const products: Products = [
         desc: `The 3142 is equipped with a riddling grate and ashpan, making it easy to remove ash and clean the stove.
         It is manufactured using the latest combustion principles with tertiary air supply and meets the most stringent environmental requirements.
         It can be fired with wood, briquettes or approved smokeless fuel and is suitable for heating an area of up to 75 cubic metres.`,
+        quantity: 2,
     },
     {
         name: 'Stove-Fireplace Morso 6843',
@@ -131,6 +142,9 @@ export const products: Products = [
         weight: 113,
         brand: 'Morso',
         img: ['25221.970.jpg', '25222.970.jpg', '25223.970.jpg'],
+        desc: `Large door with handle that stays cool enough to use without glove.
+        Glass clean and clear with repeated use. Firebox not huge, but big enough`,
+        quantity: 7,
     },
     {
         name: 'PLAMEN 850 GLAS, white',
@@ -140,6 +154,8 @@ export const products: Products = [
         weight: 121,
         brand: 'Plamen',
         img: ['71154.970.jpg', '71155.970.jpg', '71156.970.jpg'],
+        desc: `The stove is white, equipped with a wide hob and a spacious oven. Has a built-in drawer`,
+        quantity: 6,
     },
     {
         name: 'SLAVONAC N white',
@@ -149,6 +165,8 @@ export const products: Products = [
         weight: 95,
         brand: 'Plamen',
         img: ['71632.970.jpg', '71633.970.jpg', '71634.970.jpg'],
+        desc: `Cast iron heating and cooking stove PLAMEN SLAVONAC N white, pipe on the left. Convenient hob and spacious oven. Built-in drawer. Power: 11 kW.`,
+        quantity: 8,
     },
     {
         name: 'SLAVONAC white',
@@ -158,6 +176,9 @@ export const products: Products = [
         weight: 92,
         brand: 'Plamen',
         img: ['71166.970.jpg', '71167.970.jpg', '71168.970.jpg'],
+        desc: `Cast iron heating and cooking stove PLAMEN SLAVONAC in white colour. 
+        Convenient hob and spacious oven. Built-in drawer. Power: 11 kW.`,
+        quantity: 9,
     },
     {
         name: 'TERMO GLAS',
@@ -167,6 +188,8 @@ export const products: Products = [
         weight: 133,
         brand: 'Plamen',
         img: ['71175.970.jpg', '71176.970.jpg', '71177.970.jpg', '71178.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'Biofireplace AF (silver)',
@@ -176,6 +199,8 @@ export const products: Products = [
         weight: 21,
         brand: 'Kratki',
         img: ['9572.970.jpg', '9573.970.jpg', '10480.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Biofireplace ALPHA',
@@ -185,6 +210,8 @@ export const products: Products = [
         weight: 17,
         brand: 'Kratki',
         img: ['9584.970.jpg', '9585.970.jpg', '9586.970.jpg', '10183.970.jpg', '10184.970.jpg', '10483.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Biofireplace BRAVO 2 gold',
@@ -194,6 +221,8 @@ export const products: Products = [
         weight: 23,
         brand: 'Kratki',
         img: ['9599.970.jpg', '9600.970.jpg', '9601.970.jpg', '10204.970.jpg', '10205.970.jpg', '10489.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'Biofireplace BRAVO 2 steel',
@@ -203,6 +232,8 @@ export const products: Products = [
         weight: 23,
         brand: 'Kratki',
         img: ['9608.970.jpg', '9609.970.jpg', '9610.970.jpg', '10210.970.jpg', '10211.970.jpg', '10488.970.jpg'],
+        desc: ``,
+        quantity: 31,
     },
     {
         name: 'Biofireplace CHARLIE 2 cuprum',
@@ -212,6 +243,8 @@ export const products: Products = [
         weight: 14.5,
         brand: 'Kratki',
         img: ['9632.970.jpg', '9633.970.jpg', '9634.970.jpg', '10232.970.jpg', '10233.970.jpg', '10234.970.jpg'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'Biofireplace Kratki BALL TUV',
@@ -221,6 +254,8 @@ export const products: Products = [
         weight: 28.5,
         brand: 'Kratki',
         img: ['12823.970.jpg', '12824.970.jpg', '14733.970.jpg'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'Biofireplace Kratki DELTA (400*600)',
@@ -230,6 +265,8 @@ export const products: Products = [
         weight: 7,
         brand: 'Kratki',
         img: ['9661.970.jpg', '9662.970.jpg', '9663.970.jpg', '10247.970.jpg', '10455.970.jpg'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'Biofireplace Kratki DELTA ZEBRA (400*600)',
@@ -239,6 +276,8 @@ export const products: Products = [
         weight: 7,
         brand: 'Kratki',
         img: ['9696.970.jpg', '9697.970.jpg', '9698.970.jpg', '10248.970.jpg', '10456.970.jpg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'Biofireplace Kratki HOTEL',
@@ -248,6 +287,8 @@ export const products: Products = [
         weight: 12,
         brand: 'Kratki',
         img: ['9742.970.jpg', '9743.970.jpg', '10158.970.jpg', '10474.970.jpg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'Biofireplace Kratki MISA MINI, black',
@@ -257,6 +298,8 @@ export const products: Products = [
         weight: 3.8,
         brand: 'Kratki',
         img: ['33622.970.jpg', '33623.970.jpg', '33624.970.jpg', '33625.970.jpg', '33626.970.jpg', '33627.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Floor Biofireplace FOXTROT',
@@ -266,6 +309,8 @@ export const products: Products = [
         weight: 15,
         brand: 'Kratki',
         img: ['9714.970.jpg', '9715.970.jpg', '10444.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'Table Biofireplace MISA white',
@@ -275,6 +320,8 @@ export const products: Products = [
         weight: 8.5,
         brand: 'Kratki',
         img: ['9791.970.jpg', '9792.970.jpg', '10167.970.jpg', '10168.970.jpg', '10169.970.jpg', '10477.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Biofireplace Amber, ZeFire',
@@ -284,6 +331,8 @@ export const products: Products = [
         weight: 10,
         brand: 'ZeFire',
         img: ['20714.970.png', '20715.970.jpg', '20716.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Biofireplace Barcelona marble, ZeFire',
@@ -293,6 +342,8 @@ export const products: Products = [
         weight: 11,
         brand: 'ZeFire',
         img: ['20776.970.png', '20777.970.jpg', '20778.970.jpg', '20779.970.jpg'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'Biofireplace Elliot 1200, ZeFire',
@@ -302,6 +353,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 12,
         img: ['37915.970.png', '37916.970.jpg', '37917.970.jpg', '37918.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'Biofireplace Iris big, ZeFire',
@@ -311,6 +364,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 14,
         img: ['21188.970.png', '21189.970.jpg', '21190.970.jpg', '21191.970.jpg', '21193.970.png', '21194.970.png'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Biofireplace Quant metall, ZeFire',
@@ -320,6 +375,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 14,
         img: ['21155.970.png', '21156.970.jpg', '21157.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Biofireplace Quant stone, ZeFire',
@@ -329,6 +386,8 @@ export const products: Products = [
         weight: 6,
         brand: 'ZeFire',
         img: ['21166.970.png', '21167.970.jpg', '21168.970.jpg', '21169.970.jpg', '21170.970.jpg', '21171.970.jpg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'Biofireplace Quarter 1000, ZeFire',
@@ -338,6 +397,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 16,
         img: ['21141.970.png', '21142.970.jpg', '21143.970.jpg', '21144.970.jpg', '21145.970.jpg', '21146.970.jpg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'Biofireplace Senator, ZeFire',
@@ -347,6 +408,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 8,
         img: ['20727.970.png', '20728.970.jpg', '20729.970.jpg', '20730.970.jpg', '20731.970.jpg', '20732.970.jpg'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'Biofireplace ZeFire Constant 1200 white',
@@ -356,6 +419,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 10,
         img: ['38030.970.jpg', '38031.970.jpg', '38033.970.jpg'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'Biofireplace Balensia corner, dark oak',
@@ -365,6 +430,8 @@ export const products: Products = [
         weight: 55,
         brand: 'FireBird',
         img: ['13878.970.jpg', '13877.970.jpg', '13871.970.jpg', '13930.970.jpg', '13873.970.jpg', '13874.970.jpg'],
+        desc: ``,
+        quantity: 8,
     },
     {
         name: 'Biofireplace classic Chester (ZeFire)',
@@ -374,6 +441,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 12,
         img: ['66301.970.jpg', '66302.970.jpg', '66303.970.jpg', '66304.970.jpg', '66305.970.jpg', '66306.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Biofireplace Floor Verona',
@@ -383,6 +452,8 @@ export const products: Products = [
         weight: 60,
         brand: 'FireBird',
         img: ['9962.970.jpg', '55074.970.png', '10348.970.jpg', '18082.970.jpg', '10412.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Biofireplace Floor John Silver',
@@ -392,6 +463,8 @@ export const products: Products = [
         brand: 'Lux Fire',
         weight: 14,
         img: ['38477.970.jpg', '38478.970.jpg', '38479.970.jpg', '38480.970.jpg', '38481.970.jpg', '38482.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Biofireplace Floor Selena FIREBIRD',
@@ -401,6 +474,8 @@ export const products: Products = [
         weight: 47,
         brand: 'FireBird',
         img: ['11029.970.jpg', '11030.970.jpg', '18086.970.jpg', '11032.970.jpg', '10992.970.png', '11035.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'Biofireplace Table Volcano S (red)',
@@ -410,6 +485,8 @@ export const products: Products = [
         brand: 'Lux Fire',
         weight: 7,
         img: ['27716.970.jpg', '27717.970.jpg', '27718.970.jpg', '27719.970.jpg', '27720.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Biofireplace Table Piknic S (black)',
@@ -419,6 +496,8 @@ export const products: Products = [
         brand: 'Lux Fire',
         weight: 8,
         img: ['27867.970.jpg', '27868.970.jpg', '27869.970.jpg', '27870.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Biofireplace Table Rondo S (white)',
@@ -428,6 +507,8 @@ export const products: Products = [
         brand: 'Lux Fire',
         weight: 13,
         img: ['27871.970.jpg', '27872.970.jpg', '27873.970.jpg', '27874.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Biofireplace Table Sofia M',
@@ -444,6 +525,8 @@ export const products: Products = [
             '27910.970.jpeg',
             '27911.970.jpeg',
         ],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'Biofireplace Tauny (ZeFire)',
@@ -453,6 +536,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 11,
         img: ['67221.970.jpg', '67222.970.jpg', '67223.970.jpg', '67224.970.jpg', '67225.970.jpg'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'Biofireplace Standart 700, ZeFire',
@@ -462,6 +547,8 @@ export const products: Products = [
         brand: 'ZeFire',
         weight: 15,
         img: ['21391.970.jpg', '21392.970.jpg', '21393.970.jpg'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'Inner Biofireplace Lux Fire 730 S',
@@ -471,6 +558,8 @@ export const products: Products = [
         brand: 'Lux Fire',
         weight: 16,
         img: ['28141.970.jpg', '28140.970.jpg', '28142.970.jpg', '28143.970.jpg', '28144.970.jpg', '28145.970.jpg'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'BBQ Norman Paleo',
@@ -480,6 +569,8 @@ export const products: Products = [
         weight: 470,
         brand: 'Norman',
         img: ['24055.970.jpg', '24056.970.jpg', '24057.970.jpg'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'Hearth for fire BASKET',
@@ -489,6 +580,8 @@ export const products: Products = [
         weight: 30,
         brand: 'Kratki',
         img: ['56782.970.png', '56783.970.png', '56784.970.png', '56785.970.png', '56786.970.png'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'Hearth for fire GAMMA',
@@ -498,6 +591,8 @@ export const products: Products = [
         weight: 42,
         brand: 'Kratki',
         img: ['56793.970.png', '56792.970.png', '56794.970.png', '56795.970.png', '56796.970.png'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'Hearth for fire GOBLET',
@@ -507,6 +602,8 @@ export const products: Products = [
         weight: 43,
         brand: 'Kratki',
         img: ['56773.970.png', '56772.970.png', '56774.970.png', '56775.970.png', '56776.970.png'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'Grill Monolith Classic Pro Serie 2.0, red (big)',
@@ -516,6 +613,8 @@ export const products: Products = [
         weight: 85,
         brand: 'MONOLITH GRILL',
         img: ['31048.970.png', '24063.970.jpg', '31146.970.jpeg', '31147.970.jpeg', '31148.970.jpeg', '31149.970.jpeg'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'Grill Monolith Classic Pro Series 2.0, black (big)',
@@ -525,6 +624,8 @@ export const products: Products = [
         weight: 85,
         brand: 'MONOLITH GRILL',
         img: ['31049.970.png', '24059.970.jpg', '31153.970.jpeg', '31154.970.jpeg', '31155.970.jpeg', '31156.970.jpeg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'Grarden fireplace Jotul Terrazza',
@@ -534,6 +635,8 @@ export const products: Products = [
         weight: 30,
         brand: 'Jotul',
         img: ['25301.970.jpg', '25302.970.jpg'],
+        desc: ``,
+        quantity: 8,
     },
     {
         name: 'Grarden fireplace Jotul Terrazza XL',
@@ -543,6 +646,8 @@ export const products: Products = [
         weight: 32,
         brand: 'Jotul',
         img: ['25303.970.png', '25304.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Stove HERGOM Besaya',
@@ -552,6 +657,8 @@ export const products: Products = [
         weight: 275,
         brand: 'Hergom',
         img: ['21775.970.jpg', '21770.970.jpeg'],
+        desc: ``,
+        quantity: 12,
     },
     {
         name: 'Stove HERGOM Deva II 75',
@@ -561,6 +668,8 @@ export const products: Products = [
         weight: 180,
         brand: 'Hergom',
         img: ['21778.970.jpg', '21755.970.jpeg'],
+        desc: ``,
+        quantity: 11,
     },
     {
         name: 'Stove HERGOM TB-6H',
@@ -570,6 +679,8 @@ export const products: Products = [
         weight: 110,
         brand: 'Hergom',
         img: ['21771.970.jpeg', '21772.970.jpeg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'steel Fireplace ROCAL Barbara 90',
@@ -579,6 +690,8 @@ export const products: Products = [
         weight: 233,
         brand: 'ROCAL',
         img: ['21554.970.jpeg', '21553.970.jpeg', '21555.970.jpeg', '33258.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'steel Fireplace ROCAL D7',
@@ -588,6 +701,8 @@ export const products: Products = [
         weight: 101,
         brand: 'ROCAL',
         img: ['21580.970.jpeg', '21579.970.jpeg', '21581.970.jpeg', '33259.970.png'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'steel Fireplace ROCAL Estela',
@@ -597,6 +712,8 @@ export const products: Products = [
         weight: 217,
         brand: 'ROCAL',
         img: ['21590.970.jpeg', '21591.970.jpeg', '21592.970.jpeg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'Davos A corner',
@@ -606,6 +723,8 @@ export const products: Products = [
         weight: 150,
         brand: 'Nordpeis',
         img: ['42047.970.jpg', '42048.970.jpg', '42049.970.png'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Glasgow Klasik',
@@ -615,6 +734,8 @@ export const products: Products = [
         weight: 220,
         brand: 'ABX',
         img: ['14952.970.jpg', '14953.970.png'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Koza/K10',
@@ -624,6 +745,8 @@ export const products: Products = [
         weight: 111,
         brand: 'Kratki',
         img: ['11043.970.png', '4731.970.jpg', '11044.970.png', '11045.970.png', '13230.970.png', '13231.970.png'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'Koza/K6',
@@ -633,6 +756,8 @@ export const products: Products = [
         weight: 119,
         brand: 'Kratki',
         img: ['4742.970.jpg', '4743.970.jpg', '12288.970.jpg', '14912.970.jpg', '14913.970.jpg'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'KOZA/ORBIT',
@@ -642,6 +767,8 @@ export const products: Products = [
         weight: 99,
         brand: 'Kratki',
         img: ['10862.970.png', '10863.970.png', '10864.970.png', '10865.970.png', '13809.970.jpg'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'Fireplace Polar 6',
@@ -651,6 +778,8 @@ export const products: Products = [
         weight: 170,
         brand: 'ABX',
         img: ['15189.970.jpg', '15188.970.jpg', '31233.970.jpg', '31231.970.jpg', '15190.970.jpg', '15191.970.jpg'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'Fireplace Alborg',
@@ -660,6 +789,8 @@ export const products: Products = [
         weight: 130,
         brand: 'ABX',
         img: ['15048.970.jpg', '15049.970.jpg'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'Fireplace Alkmaar I',
@@ -669,6 +800,8 @@ export const products: Products = [
         weight: 98,
         brand: 'ABX',
         img: ['15050.970.jpg', '15051.970.jpg', '15052.970.jpg', '17280.970.jpg'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'Stove DEFRO HOME ORBIS, black steel',
@@ -678,6 +811,8 @@ export const products: Products = [
         weight: 176,
         brand: 'Defro',
         img: ['65921.970.jpg', '65922.970.jpg', '65923.970.jpg'],
+        desc: ``,
+        quantity: 6,
     },
     {
         name: 'Stove Quadro 1 Exclusive',
@@ -687,6 +822,8 @@ export const products: Products = [
         weight: 104,
         brand: 'Nordpeis',
         img: ['56743.970.jpg', '56744.970.png'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'Stove KOZA CZERWONY',
@@ -696,6 +833,8 @@ export const products: Products = [
         weight: 116,
         brand: 'Kratki',
         img: ['10351.970.jpg', '29924.970.png', '29925.970.png'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'Stove Koza/AB/S',
@@ -705,6 +844,8 @@ export const products: Products = [
         weight: 107,
         brand: 'Kratki',
         img: ['29899.970.png', '29900.970.png'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'Stove KOZA CZERWONY',
@@ -714,6 +855,8 @@ export const products: Products = [
         weight: 105,
         brand: 'Kratki',
         img: ['29918.970.png', '29919.970.png'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Stove Koza K7',
@@ -723,6 +866,8 @@ export const products: Products = [
         weight: 75,
         brand: 'Kratki',
         img: ['4752.970.jpg', '4753.970.jpg', '4754.970.jpg', '12289.970.jpg', '14916.970.jpg', '14917.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Stove Aspen',
@@ -732,6 +877,8 @@ export const products: Products = [
         weight: 110,
         brand: 'Vermont Castings',
         img: ['18942.970.jpg', '18943.970.jpg', '18944.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Stove-Fireplace INVICTA Norik',
@@ -741,6 +888,8 @@ export const products: Products = [
         weight: 104,
         brand: 'Invicta',
         img: ['61689.970.jpg', '61690.970.jpg', '61691.970.png'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'Stove-Fireplace THOR 8 VIEW',
@@ -750,6 +899,8 @@ export const products: Products = [
         weight: 140,
         brand: 'Kratki',
         img: ['12253.970.jpg', '12254.970.jpg', '12252.970.jpg', '12255.970.jpg', '13527.970.jpg', '13528.970.jpg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'Stove-Fireplace VERMONT',
@@ -759,6 +910,8 @@ export const products: Products = [
         weight: 100,
         brand: 'ABX',
         img: ['15739.970.jpg', '15740.970.jpg', '15741.970.jpg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'Outdoor Fireplace RIVIERA FIREPLACE',
@@ -768,6 +921,8 @@ export const products: Products = [
         weight: 100,
         brand: 'Nordpeis',
         img: ['42383.970.jpg', '42384.970.jpg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'Stove Koza/K10',
@@ -777,6 +932,8 @@ export const products: Products = [
         weight: 111,
         brand: 'Kratki',
         img: ['4726.970.jpg', '4727.970.jpg', '12293.970.jpg'],
+        desc: ``,
+        quantity: 75,
     },
     {
         name: 'Etna (Zuzia, Eryk)',
@@ -786,6 +943,8 @@ export const products: Products = [
         weight: 159.3,
         brand: 'Keddy',
         img: ['7504.970.jpg', '7505.970.jpg'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'La Nordica Dorella (Dorella L8 Liberty)',
@@ -795,6 +954,8 @@ export const products: Products = [
         weight: 180,
         brand: 'La Nordica',
         img: ['53478.970.jpg', '53479.970.jpg', '53480.970.jpg', '53481.970.jpg', '53482.970.jpg', '53483.970.jpg'],
+        desc: ``,
+        quantity: 5,
     },
     {
         name: 'La Nordica Fedora White Infinity',
@@ -804,6 +965,8 @@ export const products: Products = [
         weight: 200,
         brand: 'La Nordica',
         img: ['53595.970.jpg', '53596.970.jpg', '53597.970.jpg', '59013.970.jpg', '59014.970.jpg'],
+        desc: ``,
+        quantity: 44,
     },
     {
         name: 'La Nordica Fulvia',
@@ -813,6 +976,8 @@ export const products: Products = [
         weight: 220,
         brand: 'La Nordica',
         img: ['53542.970.jpg', '53543.970.jpg', '53544.970.jpg', '53545.970.jpg', '53546.970.jpg', '53547.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'La Nordica Gemma (Gemma)',
@@ -822,6 +987,8 @@ export const products: Products = [
         weight: 250,
         brand: 'La Nordica',
         img: ['53486.970.jpg', '53487.970.jpg', '53488.970.jpg', '53489.970.jpg', '53490.970.jpg', '53491.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'La Nordica Giulietta',
@@ -831,6 +998,8 @@ export const products: Products = [
         weight: 150,
         brand: 'La Nordica',
         img: ['53548.970.jpg', '53549.970.jpg', '53550.970.jpg', '53551.970.jpg', '53552.970.jpg', '53553.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
     {
         name: 'La Nordica Isetta Con Cerchi Evo',
@@ -840,6 +1009,8 @@ export const products: Products = [
         weight: 160,
         brand: 'La Nordica',
         img: ['54083.970.jpg', '54084.970.jpg', '54085.970.jpg', '54086.970.jpg', '59413.970.jpg', '59414.970.jpg'],
+        desc: ``,
+        quantity: 43,
     },
     {
         name: 'La Nordica Isotta Con Cerchi Evo',
@@ -849,6 +1020,8 @@ export const products: Products = [
         weight: 186,
         brand: 'La Nordica',
         img: ['54092.970.jpg', '54093.970.jpg', '54094.970.jpg', '54095.970.jpg', '59420.970.jpg', '59421.970.jpg'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'La Nordica Major',
@@ -858,6 +1031,8 @@ export const products: Products = [
         weight: 190,
         brand: 'La Nordica',
         img: ['53376.970.jpg', '53377.970.jpg'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'La Nordica Mamy CMO',
@@ -867,6 +1042,8 @@ export const products: Products = [
         weight: 200,
         brand: 'La Nordica',
         img: ['53619.970.jpg', '53620.970.jpg', '53621.970.jpg', '59060.970.jpg', '59061.970.jpg'],
+        quantity: 7,
+        desc: ``,
     },
     {
         name: 'La Nordica Mamy NE',
@@ -876,6 +1053,8 @@ export const products: Products = [
         weight: 220,
         brand: 'La Nordica',
         img: ['53634.970.jpg', '53635.970.jpg'],
+        desc: ``,
+        quantity: 7,
     },
     {
         name: 'La Nordica Mignon BI/BW',
@@ -885,6 +1064,8 @@ export const products: Products = [
         weight: 150,
         brand: 'La Nordica',
         img: ['53386.970.jpg', '53387.970.jpg', '53388.970.jpg', '53389.970.jpg', '53390.970.jpg', '58865.970.jpg'],
+        desc: ``,
+        quantity: 1,
     },
     {
         name: 'La Nordica Romantica 3,5',
@@ -894,6 +1075,8 @@ export const products: Products = [
         weight: 160,
         brand: 'La Nordica',
         img: ['53474.970.jpg', '53475.970.jpg', '53476.970.jpg', '53477.970.jpg', '58937.970.jpg', '58938.970.jpg'],
+        desc: ``,
+        quantity: 11,
     },
     {
         name: 'La Nordica Romantica 4,5',
@@ -903,6 +1086,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 60,
         img: ['53495.970.jpg', '53496.970.jpg', '53497.970.jpg', '53498.970.jpg', '53499.970.jpg', '53500.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'La Nordica ROSA XXL MAIOLICA',
@@ -912,6 +1097,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 70,
         img: ['54276.970.jpg', '54277.970.jpg', '54278.970.jpg', '54279.970.jpg', '59545.970.jpg', '59546.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'La Nordica Rosetta Maiolica',
@@ -921,6 +1108,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 78,
         img: ['53613.970.jpg', '53614.970.jpg', '53615.970.jpg', '53616.970.jpg', '53617.970.jpg', '53618.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'La Nordica Rossella R1',
@@ -930,6 +1119,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 89,
         img: ['53563.970.jpg', '53564.970.jpg', '53565.970.jpg', '53566.970.jpg', '53567.970.jpg', '58993.970.jpg'],
+        desc: ``,
+        quantity: 2,
     },
     {
         name: 'La Nordica Sovrana',
@@ -939,6 +1130,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 98,
         img: ['53568.970.jpg', '53569.970.jpg', '53570.970.jpg', '53571.970.jpg', '53572.970.jpg', '53573.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'La Nordica Super Junior',
@@ -948,6 +1141,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 74,
         img: ['53378.970.jpg', '53379.970.jpg', '53380.970.jpg', '53381.970.jpg', '58859.970.jpg', '58860.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'La Nordica Super Max',
@@ -957,6 +1152,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 89,
         img: ['53382.970.jpg', '53383.970.jpg', '53384.970.jpg', '53385.970.jpg', '58862.970.jpg', '58863.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'La Nordica Suprema',
@@ -966,6 +1163,8 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 76,
         img: ['54197.970.jpg', '54198.970.jpg', '54199.970.jpg', '59489.970.jpg', '59490.970.jpg'],
+        desc: ``,
+        quantity: 3,
     },
     {
         name: 'La Nordica TermoRosa D.S.A',
@@ -975,5 +1174,7 @@ export const products: Products = [
         brand: 'La Nordica',
         weight: 98,
         img: ['54256.970.jpg', '54257.970.jpg', '54258.970.jpg', '54259.970.jpg', '59534.970.jpg', '59535.970.jpg'],
+        desc: ``,
+        quantity: 4,
     },
 ];

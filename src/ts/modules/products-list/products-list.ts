@@ -51,6 +51,12 @@ class ProductsList {
 
     constructor(route: Routes, app: App) {
         this.route = route;
+        let tmp: HTMLElement | null = document.querySelector('.page-product-list');
+        if (tmp) tmp.style.display = 'flex';
+        tmp = document.querySelector('.page-cart');
+        if (tmp) tmp.style.display = 'none';
+        tmp = document.querySelector('.page-product-detail');
+        if (tmp) tmp.style.display = 'none';
         this.app = app;
         // запоминаем элементы слайдеров
         this.priceSlider = document.getElementById('priceSlider');
@@ -129,7 +135,6 @@ class ProductsList {
 
         // формируем массив товаров по условиям
         this.data = this.formData();
-        if (this.weightMinE) console.log('end constr', this.weightMinE.style.left);
     }
 
     formData(): Array<IProduct> {
@@ -308,7 +313,7 @@ class ProductsList {
     }
 
     draw(): void {
-        console.log('len', this.data.length);
+        console.log('len55', this.data.length);
         if (this.data.length <= 0) {
             const tmp = document.getElementById('products');
             if (tmp !== null) {
@@ -350,7 +355,13 @@ class ProductsList {
             if (brandElement) brandElement.textContent = item.brand ?? '';
 
             const btnAddToCart: HTMLButtonElement | null = productsClone.querySelector('.products__item-add-to-card');
-            if (btnAddToCart) btnAddToCart.dataset.id = item.id.toString();
+            if (btnAddToCart) {
+                const obj = this;
+                btnAddToCart.id = 'cart' + item.id.toString();
+                btnAddToCart.addEventListener('click', function () {
+                    if (obj.app.cart) obj.app.cart.addProduct(item.id);
+                });
+            }
 
             const btnDetails: HTMLButtonElement | null = productsClone.querySelector('.products__item-details');
             if (btnDetails) {
