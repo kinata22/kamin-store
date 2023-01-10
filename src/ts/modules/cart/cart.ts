@@ -65,6 +65,10 @@ class Cart {
         }
         this.saveCart();
     }
+    inCart(id: number): boolean {
+        if (this.data.find((item) => item.product.id === id)) return true;
+        return false;
+    }
     saveCart() {
         console.log('save', this.data);
         localStorage.setItem('nProduct', String(this.data.length));

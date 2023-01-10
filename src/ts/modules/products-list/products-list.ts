@@ -372,7 +372,7 @@ class ProductsList {
                 htmlItemName.href = `index.html?product=${item.id}`;
             }
 
-            const priceFormatted = `$${item.price.toString()}`;
+            const priceFormatted = ` €${item.price.toString()}`;
 
             const htmlItemPrice: HTMLElement | null = productsClone.querySelector('.products__item-price');
             if (htmlItemPrice) htmlItemPrice.textContent = priceFormatted;
@@ -390,9 +390,25 @@ class ProductsList {
             const btnAddToCart: HTMLButtonElement | null = productsClone.querySelector('.products__item-add-to-card');
             if (btnAddToCart) {
                 const obj = this;
+                if (this.app.cart?.inCart(item.id)) {
+                    btnAddToCart.textContent = 'In cart';
+                    btnAddToCart.style.background = '#aae0e785';
+                } else {
+                    btnAddToCart.textContent = 'Add to cart';
+                }
                 btnAddToCart.id = 'cart' + item.id.toString();
                 btnAddToCart.addEventListener('click', function () {
-                    if (obj.app.cart) obj.app.cart.addProduct(item.id);
+                    if (obj.app.cart) {
+                        if (obj.app.cart.inCart(item.id)) {
+                            obj.app.cart.delProduct(item.id);
+                            this.textContent = 'Add to cart';
+                            this.style.background = '#efefef';
+                        } else {
+                            obj.app.cart.addProduct(item.id);
+                            this.textContent = 'In cart';
+                            this.style.background = '#aae0e785';
+                        }
+                    }
                 });
             }
 
