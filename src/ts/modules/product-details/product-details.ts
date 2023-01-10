@@ -121,6 +121,13 @@ class ProductDetail {
                 }
             });
         }
+        const btnBuyNow: HTMLElement | null = document.getElementById('product-buy-now');
+        if (btnBuyNow) {
+            btnBuyNow.addEventListener('click', function () {
+                app.modalWin?.show();
+            });
+        }
+
         const numProducts: HTMLElement | null = document.querySelector('.num__products');
         if (numProducts) numProducts.style.display = 'none';
     }

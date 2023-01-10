@@ -149,7 +149,7 @@
                             </div>
                             <div class="product-buttons">
                                 <button class="product-add-to-card" id="product-add-to-card">Add to card</button>
-                                <button class="product-buy-now" data-id="">Buy now</button>
+                                <button class="product-buy-now" id="product-buy-now">Buy now</button>
                             </div>
                         </div>
                     </div>
@@ -176,6 +176,40 @@
                 </a>
             </div>
             <textarea id="forCopy" class="forCopy"></textarea>
+            <div class="modal__container" style="display:none" id="modal">
+                <div class="modal">
+                    <button class="modal__close">X</button>
+                    <form class="modal__form">
+                        <h2 class="modal__title">Personal detail</h2>
+                        <div class="error_mess"></div>
+                        <div class="modal_elem">
+                            <input class="input input__full-name" required="" placeholder="Name & Family">
+                             </div>
+                        <div class="modal_elem">
+                            <input class="input input__phone" required="" type="phone"  placeholder="Phone number">
+                          </div>
+                        <div class="modal_elem">
+                            <input class="input input__delivery" required="" placeholder="Delivery address">
+                        </div>
+                        <div class="modal_elem">
+                            <input class="input input__email" required="" type="email" placeholder="E-mail">
+                        </div>
+                        <h2 class="modal__title">Credit cart detail</h2>
+                        <div class="credit-card">
+                            <input class="input__card input__card-number" placeholder="Card number">
+                            <div class="card__detail">
+                                <label class="card__valid" for="card-valid">VALID:</label>
+                                <input class="input__card input__card-valid" id="card-valid" placeholder="MM/YY">
+                                <label class="card__cvv" for="card-cvv">CVV:</label>
+                                <input class="input__card input__card-cvv" id="card-cvv" placeholder="Code">
+                            </div>
+                            <img class="credit-card-img" src="./images/card.png">
+                        </div>
+                        <button class="confirm__btn" id="confirm">Confirm</button>
+    
+                    </form>
+                </div>
+            </div>
         </footer>
 
         <template id="productsItemTemp">
