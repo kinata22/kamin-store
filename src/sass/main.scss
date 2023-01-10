@@ -33,6 +33,9 @@ header {
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.header__center {
+    display: flex;
+}
 
 .logo {
     height: 50px;
@@ -192,4 +195,21 @@ footer {
 }
 .filter .block-max {
     left: 97%;
+}
+
+.not-found-container {margin: 20px 10%}
+.num__products {
+    display:none; 
+    margin-left:20px;
+}
+.cart-price__price {
+    font-weight:bold;
+}
+.num__products-val {
+    font-weight:bold;
+}
+.forCopy {
+   height:0px;
+   width:0px;
+   border:0px
 }

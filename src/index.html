@@ -23,6 +23,10 @@
                         <span class="cart-price__label">Cart total:</span>
                         <span class="cart-price__price">$0</span>
                     </div>
+                    <div class="num__products">
+                        <span class="num__products-label">Found: </span>
+                        <span class="num__products-val"></span>
+                    </div>
                 </div>
                 <div class="header__cart" id="cart">
                     <div class="b-cart-button__wrapper">
@@ -40,6 +44,7 @@
                 <aside>
                     <div class="clearall">
                         <button id="clearall">Clear parameters</button>
+                        <button id="copyurl">Copy link</button>
                     </div>
 
                     <div class="filters">
@@ -130,8 +135,14 @@
                                 <span class="product-category"></span>
                             </div>
                             <div class="product-brand-box">
-                                <span class="card-label">Brand:</span> <span class="product-brand"></span>
+                                <span class="card-label">Brand:</span> 
+                                <span class="product-brand"></span>
                             </div>
+                            <div class="product-stock-box">
+                                <span class="card-label">In stock:</span> 
+                                <span class="product-stock"></span>
+                            </div>
+
                             <div class="product-desc-block">
                                 <span class="card-label">Description:</span>
                                 <p class="product-desc"></p>
@@ -164,6 +175,7 @@
                     <img class="footer__image" src="./images/logo_rs_text.svg" alt="RS School icon" />
                 </a>
             </div>
+            <textarea id="forCopy" class="forCopy"></textarea>
         </footer>
 
         <template id="productsItemTemp">
@@ -181,6 +193,7 @@
                     </div>
                     <div class="products__item-weight-box">Weight: <span class="products__item-weight"></span></div>
                     <div class="products__item-brand-box">Brand: <span class="products__item-brand"></span></div>
+                    <div class="products__item-stock-box">In stock: <span class="products__item-stock"></span></div>
                 </div>
                 <div class="products__item-buttons">
                     <button class="products__item-add-to-card" id="">Add to card</button>

@@ -11,6 +11,7 @@ class ProductDetail {
     category: string;
     weight: number;
     brand: string;
+    quantity: number;
     img: string[];
     desc?: string;
     app: App;
@@ -25,6 +26,7 @@ class ProductDetail {
         this.brand = data.brand;
         this.img = data.img;
         this.desc = data.desc;
+        this.quantity = data.quantity;
         this.app = app;
     }
 
@@ -93,6 +95,9 @@ class ProductDetail {
         const brandElement: HTMLElement | null = document.querySelector('.product-brand');
         if (brandElement) brandElement.textContent = this.brand ?? '';
 
+        const stockElement: HTMLElement | null = document.querySelector('.product-stock');
+        if (stockElement) stockElement.textContent = this.quantity.toString();
+
         const descElement: HTMLElement | null = document.querySelector('.product-desc');
         if (descElement) descElement.textContent = this.desc ?? '';
 
@@ -103,6 +108,8 @@ class ProductDetail {
                 if (app.cart) app.cart.addProduct(id);
             });
         }
+        const numProducts: HTMLElement | null = document.querySelector('.num__products');
+        if (numProducts) numProducts.style.display = 'none';
     }
 }
 

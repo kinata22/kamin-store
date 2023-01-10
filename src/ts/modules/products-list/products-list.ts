@@ -33,6 +33,7 @@ class ProductsList {
     weightMinE: HTMLElement | null;
     weightMaxE: HTMLElement | null;
     weightRange: HTMLElement | null;
+    numProductsVal: HTMLElement | null; // вывод кол-ва товаров при данных условиях
     mainWeightMin: number; // граничные веса и цены для товаров без условий
     mainWeightMax: number;
     mainPriceMin: number;
@@ -47,6 +48,7 @@ class ProductsList {
     curWeightMax: number;
 
     clearAll: HTMLElement | null;
+    copyUrl: HTMLElement | null;
     app: App;
 
     constructor(route: Routes, app: App) {
@@ -58,6 +60,9 @@ class ProductsList {
         tmp = document.querySelector('.page-product-detail');
         if (tmp) tmp.style.display = 'none';
         this.app = app;
+        this.numProductsVal = document.querySelector('.num__products-val');
+        if (this.numProductsVal) this.numProductsVal.innerHTML = '';
+
         // запоминаем элементы слайдеров
         this.priceSlider = document.getElementById('priceSlider');
         this.weightSlider = document.getElementById('weightSlider');
@@ -132,6 +137,29 @@ class ProductsList {
                 obj.clear();
             });
         }
+        this.copyUrl = document.getElementById('copyurl');
+        if (this.copyUrl) {
+            this.copyUrl.addEventListener('click', function () {
+                const tmpWrite: HTMLTextAreaElement | null = document.getElementsByTagName('textarea')[0];
+                if (tmpWrite) {
+                    console.log('textarea', tmpWrite, window.location.href);
+                    tmpWrite.innerHTML = window.location.href;
+                    tmpWrite.value = window.location.href;
+                    tmpWrite.select();
+                    //                    const selection = window.getSelection();
+                    try {
+                        if (document.execCommand('copy')) {
+                            this.innerHTML = 'Copied';
+                            setTimeout(() => {
+                                this.innerHTML = 'Copy Link';
+                            }, 1000);
+                        }
+                    } catch (err) {
+                        console.log('Oops, unable to copy');
+                    }
+                }
+            });
+        }
 
         // формируем массив товаров по условиям
         this.data = this.formData();
@@ -200,6 +228,8 @@ class ProductsList {
             this.currentPage = 0;
             route.page = 0;
         }
+        if (this.numProductsVal) this.numProductsVal.innerHTML = String(newProduct.length);
+
         if (route.page >= 0)
             return newProduct.slice(route.page * this.productInPage, (route.page + 1) * this.productInPage);
         return newProduct;
@@ -346,18 +376,16 @@ class ProductsList {
 
             const htmlItemPrice: HTMLElement | null = productsClone.querySelector('.products__item-price');
             if (htmlItemPrice) htmlItemPrice.textContent = priceFormatted;
-
             const htmlItemId: HTMLElement | null = productsClone.querySelector('.products__item-id');
             if (htmlItemId) htmlItemId.textContent = item.id.toString();
-
             const htmlItemCategory: HTMLElement | null = productsClone.querySelector('.products__item-category');
             if (htmlItemCategory) htmlItemCategory.textContent = item.category;
-
             const weightElement: HTMLElement | null = productsClone.querySelector('.products__item-weight');
             if (weightElement) weightElement.textContent = (item.weight ?? '').toString() + ' kg';
-
             const brandElement: HTMLElement | null = productsClone.querySelector('.products__item-brand');
             if (brandElement) brandElement.textContent = item.brand ?? '';
+            const stockElement: HTMLElement | null = productsClone.querySelector('.products__item-stock');
+            if (stockElement) stockElement.textContent = item.quantity.toString();
 
             const btnAddToCart: HTMLButtonElement | null = productsClone.querySelector('.products__item-add-to-card');
             if (btnAddToCart) {
@@ -407,6 +435,8 @@ class ProductsList {
         if (tmp !== null) tmp.innerHTML = String(this.weightMin);
         tmp = document.getElementById('nWeightMax');
         if (tmp !== null) tmp.innerHTML = String(this.weightMax);
+        const numProducts: HTMLElement | null = document.querySelector('.num__products');
+        if (numProducts) numProducts.style.display = 'block';
     }
 
     drawSide(): void {
@@ -712,14 +742,8 @@ class ProductsList {
         if (elem !== null) setPosOne(elem, wMax);
     }
     clear() {
-        this.route.clear;
-        this.route.weightFrom = '';
-        this.route.weightTo = '';
-        this.route.priceFrom = '';
-        this.route.priceTo = '';
-        this.route.cats.length = 0;
-        this.route.brands.length = 0;
-        history.pushState({}, '', 'index.html');
+        // console.log('pl');
+        this.route.clear();
         this.currentPage = 0;
         this.curPriceMin = this.mainPriceMin;
         this.curPriceMax = this.mainPriceMax;

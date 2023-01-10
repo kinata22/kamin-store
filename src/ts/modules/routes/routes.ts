@@ -161,6 +161,7 @@ export class Routes {
         history.pushState({ page: this.url.search }, '', this.url.search);
     }
     clear() {
+        // console.log('clear');
         this.url.searchParams.delete('category');
         this.url.searchParams.delete('brand');
         this.url.searchParams.delete('weightFrom');
@@ -174,5 +175,6 @@ export class Routes {
         this.priceFrom = '';
         this.priceTo = '';
         history.pushState({}, '', 'index.html');
+        // window.history.pushState({}, '', 'index.html');
     }
 }

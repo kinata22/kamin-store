@@ -31,6 +31,8 @@ class Cart {
         const cartVal = document.getElementsByClassName('cart-price__price');
         if (cartVal)
             cartVal[0].innerHTML = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(sum);
+        const numProducts: HTMLElement | null = document.querySelector('.num__products');
+        if (numProducts) numProducts.style.display = 'none';
     }
     addProduct(id: number) {
         console.log('addproduct-before', this.data);
