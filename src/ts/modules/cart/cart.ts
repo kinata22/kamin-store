@@ -5,6 +5,7 @@ import App from '../app';
 
 class Cart {
     data: Array<IProductInCart>;
+    buyBtn: HTMLElement | null;
     app: App;
 
     constructor(app: App) {
@@ -33,9 +34,9 @@ class Cart {
             cartVal[0].innerHTML = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(sum);
         const numProducts: HTMLElement | null = document.querySelector('.num__products');
         if (numProducts) numProducts.style.display = 'none';
-        const buyBtn: HTMLElement | null = document.querySelector('.buy__btn');
-        if (buyBtn) {
-            buyBtn.addEventListener('click', function () {
+        this.buyBtn = document.querySelector('.buy__btn');
+        if (this.buyBtn) {
+            this.buyBtn.addEventListener('click', function () {
                 app.modalWin?.show();
             });
         }
@@ -113,9 +114,11 @@ class Cart {
             tmp = document.getElementById('cartList');
             if (tmp !== null) {
                 tmp.innerHTML = '<h2>Cart is empty</h2>';
+                if (this.buyBtn) this.buyBtn.style.display = 'none';
                 return;
             }
         }
+        if (this.buyBtn) this.buyBtn.style.display = 'block';
         if (templ != null && obj !== null) {
             let i = 1;
             let sum = 0;
