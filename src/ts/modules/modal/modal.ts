@@ -19,13 +19,38 @@ class ModalWin {
         if (creditCard) {
             creditCard.style.backgroundImage = 'url("./images/card.png")';
         }
-        const confirm: HTMLElement | null = document.querySelector('.confirm__btn');
+        const confirm: HTMLElement | null = document.getElementById('confirm');
         if (confirm) {
             confirm.addEventListener('click', function () {
-                app.modalWin?.confirm();
+                const res = app.modalWin?.confirm();
+                console.log('confirm', res);
+                return res;
             });
         }
+        const cardValid: HTMLInputElement | null = document.querySelector('.input__card-valid');
+        cardValid?.addEventListener('input', function () {
+            this.value = this.value.length === 2 ? this.value + '/' : this.value;
+            if (this.value.length > 5) {
+                this.value = this.value.slice(0, 5);
+            }
+        });
+        const cardNumber: HTMLInputElement | null = document.querySelector('.input__card-number');
+        cardNumber?.addEventListener('input', function () {
+            const logo: HTMLImageElement | null = document.querySelector('.credit-card-img');
+            if (logo) {
+                if (this.value[0] === '4') logo.src = './images/visa.png';
+                else if (this.value[0] === '5') logo.src = './images/mc.png';
+                else if (this.value[0] === '3') logo.src = './images/ae.png';
+                else logo.src = './images/card.png';
+            }
+        });
+        const form: HTMLFormElement | null = document.querySelector('.modal__form');
+        const obj = this;
+        form?.addEventListener('onsubmit', function () {
+            return obj.confirm();
+        });
     }
+
     show() {
         if (this.win) this.win.style.display = 'flex';
     }
@@ -37,6 +62,9 @@ class ModalWin {
         const error_mess: HTMLElement | null = document.querySelector('.error_mess');
         const phone: HTMLInputElement | null = document.querySelector('.input__phone');
         const delivery: HTMLInputElement | null = document.querySelector('.input__delivery');
+        const cardNumber: HTMLInputElement | null = document.querySelector('.input__card-number');
+        const cardValid: HTMLInputElement | null = document.querySelector('.input__card-valid');
+        const cardCVV: HTMLInputElement | null = document.querySelector('.input__card-cvv');
 
         let mess = '';
         if (fio) {
@@ -61,7 +89,36 @@ class ModalWin {
                 if (tmp.length >= 18 && arrfio.length >= 3 && res > 2) mess = '';
                 else mess = 'Delivery adress must consist from 3 (or more) words with length 5 оr more symbols';
             }
-        if (error_mess) error_mess.innerHTML = mess;
+        if (mess.length <= 0)
+            if (cardNumber) {
+                const tmp = cardNumber.value;
+                if (tmp.length === 16 && tmp.match(/^[0-9]{16}$/) != null) mess = '';
+                else mess = 'card Number must consist from 16 digits';
+            }
+        if (mess.length <= 0)
+            if (cardValid) {
+                const tmp = cardValid.value.split('/');
+                if (
+                    tmp.length === 2 &&
+                    Number(tmp[0]) < 13 &&
+                    Number(tmp[0]) > 0 &&
+                    Number(tmp[1]) > 22 &&
+                    Number(tmp[1]) < 40
+                )
+                    mess = '';
+                else mess = 'card Valid must have format MM/YY and be actual';
+            }
+        if (mess.length <= 0)
+            if (cardCVV) {
+                const tmp = cardCVV.value;
+                if (tmp.length === 3 && tmp.match(/^[0-9]{3}$/) != null) mess = '';
+                else mess = 'card Valid must consist from 3 digits';
+            }
+        if (error_mess) {
+            error_mess.innerHTML = mess;
+            return false;
+        }
+        return true;
     }
 }
 /*

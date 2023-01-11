@@ -161,7 +161,11 @@
                 <div class="cartList" id="cartList"></div>
                 <div class="cartEnd">
                     <div class="cartEnd__price" id="priceE"></div>
+                    <div class="cartEnd__bue">
+                        <button class="confirm__btn buy__btn" id="buy__btn">Buy</button>
+                    </div>
                 </div>
+                
             </div>
         </main>
 
@@ -183,25 +187,26 @@
                         <h2 class="modal__title">Personal detail</h2>
                         <div class="error_mess"></div>
                         <div class="modal_elem">
-                            <input class="input input__full-name" required="" placeholder="Name & Family">
+                            <input class="input input__full-name" required="" placeholder="Name">
                              </div>
                         <div class="modal_elem">
-                            <input class="input input__phone" required="" type="phone"  placeholder="Phone number">
+                            <input class="input input__phone" required="" type="phone"  placeholder="Phone">
                           </div>
                         <div class="modal_elem">
                             <input class="input input__delivery" required="" placeholder="Delivery address">
+                           
                         </div>
                         <div class="modal_elem">
                             <input class="input input__email" required="" type="email" placeholder="E-mail">
                         </div>
                         <h2 class="modal__title">Credit cart detail</h2>
                         <div class="credit-card">
-                            <input class="input__card input__card-number" placeholder="Card number">
+                            <input class="input__card input__card-number" placeholder="Card number" required="" minlength="16" maxlength="16">
                             <div class="card__detail">
                                 <label class="card__valid" for="card-valid">VALID:</label>
-                                <input class="input__card input__card-valid" id="card-valid" placeholder="MM/YY">
+                                <input class="input__card input__card-valid" id="card-valid" placeholder="MM/YY" minlength="5" required="" >
                                 <label class="card__cvv" for="card-cvv">CVV:</label>
-                                <input class="input__card input__card-cvv" id="card-cvv" placeholder="Code">
+                                <input class="input__card input__card-cvv" id="card-cvv" placeholder="Code" minlength="3" maxlength="3" required="" >
                             </div>
                             <img class="credit-card-img" src="./images/card.png">
                         </div>

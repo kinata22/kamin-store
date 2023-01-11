@@ -33,6 +33,12 @@ class Cart {
             cartVal[0].innerHTML = new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(sum);
         const numProducts: HTMLElement | null = document.querySelector('.num__products');
         if (numProducts) numProducts.style.display = 'none';
+        const buyBtn: HTMLElement | null = document.querySelector('.buy__btn');
+        if (buyBtn) {
+            buyBtn.addEventListener('click', function () {
+                app.modalWin?.show();
+            });
+        }
     }
     addProduct(id: number) {
         console.log('addproduct-before', this.data);
