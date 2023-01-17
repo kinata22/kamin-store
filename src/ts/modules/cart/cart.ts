@@ -72,6 +72,10 @@ class Cart {
         }
         this.saveCart();
     }
+    clearCart() {
+        this.data.length = 0;
+    }
+
     inCart(id: number): boolean {
         if (this.data.find((item) => item.product.id === id)) return true;
         return false;

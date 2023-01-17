@@ -124,6 +124,7 @@ class ProductDetail {
         const btnBuyNow: HTMLElement | null = document.getElementById('product-buy-now');
         if (btnBuyNow) {
             btnBuyNow.addEventListener('click', function () {
+                if (app.cart && !app.cart.inCart(id)) app.cart.addProduct(id);
                 app.modalWin?.show();
             });
         }
